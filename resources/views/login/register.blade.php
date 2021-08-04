@@ -1,5 +1,5 @@
 @extends('plantilla-base')
-@section('title', Register)
+@section('title', "Register")
 @section('css')
     
 @endsection

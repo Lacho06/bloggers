@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return 'Vista Principal';
 });
 
 Route::get('login', [LoginController::class, 'create'])->name('login.create');
