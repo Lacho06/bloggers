@@ -63,7 +63,7 @@
                             </div>
                             <div class="col-4 d-flex flex-column justify-content-around align-items-center">
                                 <div id="mostrarImagen" style="width: 50px; height:50px;" class="border rounded-circle">
-                                    <img src="{{asset('img/img-perfil-default.jpg')}}" alt="" width="50" height="50" class="rounded-circle">
+                                    <img src="{{asset('img/img-perfil-default.png')}}" alt="" width="50" height="50" class="rounded-circle">
                                 </div>
                                 <input type="file" name="file" id="multimedia" style="display: none;">
                                 <button type="button" onclick="document.getElementById('multimedia').click();" class="btn btn-dark mt-3">Browse...</button>

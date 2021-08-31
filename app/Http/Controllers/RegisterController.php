@@ -45,14 +45,26 @@ class RegisterController extends Controller
             $image->imageable_id = $user->id;
             $image->imageable_type = User::class;
             $image->save();
+
             // mandamos un mensaje a la vista principal indicando q se creo con exito
             $mensaje = "Usuario creado con éxito";
 
             Auth::login($user);
             return redirect()->route('home', compact('mensaje', 'user', 'image'));
         }else{
-            $mensaje = "Error al intentar crear el usuario, por favor introduzca correctamente los datos";
-            return redirect()->route('register.create', 'mensaje');
+            //seteamos como null la img xq en el modelo tenemos un metodo q verifica si esta o no
+            //vacio ese campo y en caso d estarlo en la vista colocamos la img default
+            $image = new Image();
+            $image->url = null;
+            $image->imageable_id = $user->id;
+            $image->imageable_type = User::class;
+            $image->save();
+
+            // mandamos un mensaje a la vista principal indicando q se creo con exito
+            $mensaje = "Usuario creado con éxito";
+
+            Auth::login($user);
+            return redirect()->route('home', compact('mensaje', 'user', 'image'));
         }
     }
 }
