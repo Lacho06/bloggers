@@ -1,0 +1,7 @@
+puse el menu en la plantilla base pero me sale en la seccion de login (sugerencia: en caso de q no quieras dejar el menu en la seccion d login y registro hacer una plantilla para registro y login )
+como quieres q haga los posts de la vista home o sea la imagen el texto si lleva titulos subtitulos la categoria el usuario q lo subio todos esos detalles
+
+
+
+
+
