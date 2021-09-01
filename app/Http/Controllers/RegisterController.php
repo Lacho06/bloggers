@@ -35,36 +35,27 @@ class RegisterController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        //subimos la imagen al servidor
+        $image = new Image();
+
         if($request->file('file')){
+            //subimos la imagen al servidor
             $name = time().'_'.$request->file->getClientOriginalName();
             $route = $request->file('file')->storeAs('images', $name, 'public');
             //guardamos en la base de datos la ruta de la imagen
-            $image = new Image();
             $image->url = 'storage/'.$route;
-            $image->imageable_id = $user->id;
-            $image->imageable_type = User::class;
-            $image->save();
 
-            // mandamos un mensaje a la vista principal indicando q se creo con exito
-            $mensaje = "Usuario creado con éxito";
-
-            Auth::login($user);
-            return redirect()->route('home', compact('mensaje', 'user', 'image'));
         }else{
             //seteamos como null la img xq en el modelo tenemos un metodo q verifica si esta o no
             //vacio ese campo y en caso d estarlo en la vista colocamos la img default
-            $image = new Image();
             $image->url = null;
-            $image->imageable_id = $user->id;
-            $image->imageable_type = User::class;
-            $image->save();
-
-            // mandamos un mensaje a la vista principal indicando q se creo con exito
-            $mensaje = "Usuario creado con éxito";
-
-            Auth::login($user);
-            return redirect()->route('home', compact('mensaje', 'user', 'image'));
         }
+        $image->imageable_id = $user->id;
+        $image->imageable_type = User::class;
+        $image->save();
+        // mandamos un mensaje a la vista principal indicando q se creo con exito
+        $mensaje = "Usuario creado con éxito";
+
+        Auth::login($user);
+        return redirect()->route('home', compact('mensaje', 'user', 'image'));
     }
 }
