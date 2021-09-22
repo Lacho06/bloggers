@@ -1,5 +1,15 @@
-puse el menu en la plantilla base pero me sale en la seccion de login (sugerencia: en caso de q no quieras dejar el menu en la seccion d login y registro hacer una plantilla para registro y login )
-como quieres q haga los posts de la vista home o sea la imagen el texto si lleva titulos subtitulos la categoria el usuario q lo subio todos esos detalles
+^puse el menu en la plantilla base pero me sale en la seccion de login (sugerencia: en caso de q no quieras dejar el menu en la seccion d login y registro hacer una plantilla para registro y login )
+^como quieres q haga los posts de la vista home o sea la imagen el texto si lleva titulos subtitulos la categoria el usuario q lo subio todos esos detalles
+
+
+/*Creacion del Componente CreateComponent */
+
+^tengo q controlar el max-width y max-height de la foto de la vista show
+
+-Buscar una imagen por default para subir imagen , o sea ya no seria la img de perfil de usuario sino una img representativa para posts ya sea una ilustracion conlas lomitas y el solecito o algo parecido :)               
+-tenemos que sincronizar vue con laravel
+-la vista show no tiene responsive
+-donde va el estracto???
 
 
 

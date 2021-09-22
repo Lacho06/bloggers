@@ -19,7 +19,7 @@
         <div class="row">
 
             {{--   posts   --}}
-            <div class="col-12 col-md-7 col-lg-9">
+            <div class="col-12" >
                 <div class="container-fluid">
                     <div class="row mh justify-content-around">
 
@@ -35,7 +35,7 @@
                                         $imgPortada = false;
                                     @endphp
 
-                                        <div class="col-12 col-md-5 my-3" >
+                                        <div class="col-12 col-md-5 col-lg-3 mx-lg-1 my-3" >
                                             <div class="container-fluid h-100 p-0">
                                                 <div class="row h-100 p-0  shadow rounded"> 
                                                     <div class="col-12 col-sm-5 col-md-12 col-lg-5 bg-primary m-0 p-0 rounded-left">
@@ -74,7 +74,7 @@
                             {{-- sino encuentra una imagen se le coloca un color de fondo x defecto --}}
                             @if ($imgPortada)
 
-                                        <div class="col-12 col-md-5 my-3" >                                            
+                                        <div class="col-12 col-md-5 col-lg-3 mx-lg-1 my-3" >                                            
                                             <div class="container-fluid h-100 p-0">
                                                 <div class="row h-100 p-0  shadow rounded bg-light">
                                                     <div class="col-12 d-flex flex-column align-items-start justify-content-around">                                                            
@@ -111,8 +111,6 @@
                     </div>
                 </div>
             </div>
-
-            <x-sidebar />
             
 
         </div>

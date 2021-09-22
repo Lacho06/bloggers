@@ -125,7 +125,6 @@
     @yield('css')
 </head>
 <body>
-
     @yield('header')
 
     @yield('main')
@@ -142,5 +141,6 @@
     {{--  Bootstrap 4 scripts  --}}
 
     @yield('js')
+
 </body>
 </html>

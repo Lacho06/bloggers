@@ -2,7 +2,7 @@
         <!-- menu de navegacion -->
         <nav class="navbar navbar-expand-md bg-light  navbar-light fixed-top " >
 
-            <a href="#"  class="navbar-brand" >Bloggers</a>
+            <a href="{{route('home')}}"  class="navbar-brand" >Bloggers</a>
 
             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#menu_collapse" style="outline:0;"  >
                 <span class="navbar-toggler-icon" ></span>

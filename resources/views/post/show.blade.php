@@ -4,26 +4,26 @@
 
 @endsection
 @section('header')
-
+    <x-nav />
 @endsection
 @section('main')
 
-    <section class="container-fluid">
+    <section class="container-fluid mt-5">
         <div class="row">
             {{-- Post details --}}
             <div class="col-12 col-md-7 col-lg-9 mb-5">
                 <div class="container">
                     <div class="row d-flex flex-column align-items-center justify-content-center mt-5">
                         <div class="col-10 center my-4">
-                            <h1 class="text-center" >Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptate, fuga?</h1>
+                            <h1 class="text-center" >Post Details</h1>
                         </div>
                         <div class="col-10 center">
-                            <img src="{{asset('storage/posts/img-ejemplo.jpg')}}" class="rounded-lg " alt="">
+                            <img src="{{asset('storage/posts/img-ejemplo.jpg')}}" class="rounded-lg " style="max-width:100%;" alt="">
                         </div>
                         <div class="col-10 mh mt-4" >   
                             <div class="container-fluid">
                                 <div class="row mh py-2">
-                                    <div class="col-3 rounded shadow">
+                                    <div class="col-12 col-lg-3 order-last order-lg-first rounded shadow">
                                         <div class="container-fluid">
                                             <div class="row center ">
                                                 <div class="col-12 d-flex flex-column align-items-center ">
