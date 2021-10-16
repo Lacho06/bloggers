@@ -10,7 +10,7 @@
     {{-- esta vista solo se le muestra a los usuarios autenticados--}}
 
     <div class="my-5 py-5" id="app">
-        <create-component></create-component>
+        <create-component :route1="'{{route('home')}}'" :route2="'{{route('home')}}'" :route3="'{{route('home')}}'" :route4="'{{route('home')}}'"  ></create-component>
     </div>
 
 @endsection

@@ -10,15 +10,15 @@
 
             <div class="collapse navbar-collapse d-md-flex justify-content-end" id="menu_collapse" >
 
-                <ul class="navbar-nav" >
+                <ul class="navbar-nav align-items-center" >
                     <li class="nav-item" ><a href="{{route('post.create')}}" class="nav-link">Crear Post</a></li>
                     <li class="nav-item" ><a href="{{route('post.index')}}" class="nav-link">Ver mis Posts</a></li>
-                    <li class="nav-item dropdown" ><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"    >Link 4</a>
+                    <li class="nav-item dropdown" ><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" ><span class="rounded-circle" style="width: 37px; height:37px;" ><img src="{{asset('images/img-perfil-default.png')}}" class="rounded-circle" style="width: 37px; height:37px;" alt=""></span></a>                                                                                                                      
 
                         <div class="dropdown-menu " >
-                            <a href="#" class="dropdown-item"  >Sublink 1</a>
-                            <a href="#" class="dropdown-item"  >Sublink 2</a>
-                            <a href="#" class="dropdown-item"  >Sublink 3</a>
+                            <a href="#" class="dropdown-item"  >Profile</a>
+                            <a href="#" class="dropdown-item"  >Account</a>
+                            <a href="#" class="dropdown-item border-top"  >Logout</a>
                         </div>
 
                     </li>

@@ -9,25 +9,25 @@
 						<div class="row justify-content-around">
 
 							<!-- form Titulo -->
-							<form action="" class="col-11 d-flex"  >
-								<input type="text" v-on:keyup="typingTit" placeholder="titulo" class="form-control my-2 p-1 tituloInput" >
+							<form class="col-11 d-flex" :action="route1" >
+								<input type="text" name="titulo" v-on:keyup="typingTit" placeholder="titulo" class="form-control my-2 p-1 tituloInput" >
 								<button type="submit" class="btn btn-sm btn-success my-1 ml-2 text-nowrap" id="submitTitle" >Add Title</button>
 							</form>
 		
 							<!-- form Estracto -->
-							<form action="" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center">
-								<textarea name="" id="" rows="8" v-on:keyup="typingEst" class="form-control my-2 estractoInput" >Estracto</textarea>
+							<form :action="route2" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center">
+								<textarea name="estracto" id="" rows="8" v-on:keyup="typingEst" class="form-control my-2 estractoInput" >Estracto</textarea>
 								<button type="submit" class="btn btn-sm btn-success mt-1 mb-3 mb-lg-1  text-nowrap" id="submitEst" >Add Estracto</button>
 							</form>
 			
 							<!-- form Descripcion -->
-							<form action="" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center" >
-								<textarea name="" id="" rows="8" v-on:keyup="typingDesc" class="form-control my-2 descripcionInput" >Descripcion</textarea>						
+							<form :action="route3" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center" >
+								<textarea name="descripcion" id="" rows="8" v-on:keyup="typingDesc" class="form-control my-2 descripcionInput" >Descripcion</textarea>						
 								<button type="submit" class="btn btn-sm btn-success mt-1 mb-3 mb-lg-1  text-nowrap" id="submitDesc" >Add Description</button>
 							</form>
 		
 							<!-- form Imagen -->
-							<form action="" class="col-11 col-sm-5 col-lg-3 center flex-column">
+							<form :action="route4" class="col-11 col-sm-5 col-lg-3 center flex-column">
 								<!-- img -->
 								<div class="center flex-column m-2" >
 									<div id="mostrarImagen" style="width: 180px; height:180px;" class="rounded" >
@@ -49,7 +49,7 @@
 		</div>
 
 		<!-- VISTA PREVIA -->
-		<section class="container-fluid mt-5">
+		<section class="container-fluid mt-5" id="vista_previa" @click="vistaPrevia();" >
 			<div class="row">
 
 				<div class="col-10 " >
@@ -61,16 +61,22 @@
 					<div class="container">
 						<div class="row d-flex flex-column align-items-center justify-content-center mt-5">
 
-							<div class="col-10 center" id="mostrarImagenVistaPrevia" ></div>
+							<div class="col-10 " id="mostrarImagenVistaPrevia" ></div>
 
 							<div class="col-10 mh mt-4" >   
 								<div class="container-fluid">
 									<div class="row mh py-2">
 
-										<div class="col-12 col-lg-3 order-last order-lg-first rounded shadow">
+										<div class="col-9 p-4">
+											<h2 class="mostrarTitulo" ></h2>
+											<p><small class="text-muted mostrarEstracto" ></small></p>
+											<p class="mostrarDescripcion" ></p>
+										</div>
+
+										<div class="col-12">
 											<div class="container-fluid">
 												<div class="row center ">
-													<div class="col-12 d-flex flex-column align-items-center ">
+													<div class="col-12 d-flex  ">
 														<div class="border rounded-circle my-2" style="width:55px; height:55px;" >
 															<!-- aqui va la imagen del autor o usuario q esta creando el post -->
 															<!-- {{-- @foreach ($imgsAutor as $imgAutor)
@@ -79,21 +85,15 @@
 																@endif
 															@endforeach --}} -->
 														</div>
-														<div class="d-flex flex-column align-items-center justify-content-center" >
+														<div class="d-flex flex-column align-items-start justify-content-center ml-2" >
 															<span class="text-muted" style="font-size:80%;" >Autor</span>
 															<span style="font-size:130%; font-weight:bold;" ><!--{{$post->user->name}}-->John Dae</span>
-															<span class="text-muted" style="font-size:80%;" ><!--{{$post->created_at->diffForHumans()}}-->2 days ago</span>
 														</div>
 													</div>
 												</div>
 											</div>	
 										</div>
 
-										<div class="col-9 p-4">
-											<h2 class="mostrarTitulo" ></h2>
-											<p><small class="text-muted mostrarEstracto" ></small></p>
-											<p class="mostrarDescripcion" ></p>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -102,40 +102,50 @@
 					</div>
 				</div>
 
+				<!-- buttons submit -->
+				<div class="col-12 center ">
+					<div>
+						<button type="button" class="btn btn-lg btn-dark w-100" onclick="document.getElementById('submitTitle').click(); document.getElementById('submitEst').click(); document.getElementById('submitDesc').click(); document.getElementById('submitImg').click(); alert('publicado');" >PUBLICAR</button>
+					</div>
+				</div>
+
 			</div>
 		</section>
 
-		<!-- buttons submit -->
-		<div class="container mt-3" >
-			<div class="row">
-				<div class="col-12 d-flex ">
-					<button type="button" class="btn btn-lg btn-dark w-100" onclick="document.getElementById('submitTitle').click(); document.getElementById('submitEst').click(); document.getElementById('submitDesc').click(); document.getElementById('submitImg').click();" >PUBLICAR</button>
-				</div>
-			</div>
-		</div>
+		
 
 	</section>
 </template>
 
 <script>
+
+	window.addEventListener('load', () => {
+		document.getElementById('vista_previa').style.display="none";
+	});
 	
 	export default {
 
 		methods:{
 			typingTit(e){
-				console.log(e.target.value);
 				const mostrarTitulo = document.querySelector('.mostrarTitulo');
 				mostrarTitulo.innerHTML = e.target.value;
+				if(e.target.value){
+					document.getElementById('vista_previa').style.display="block";
+				};
 			},
 			typingEst(e){
-				console.log(e.target.value);
 				const mostrarEstracto = document.querySelector('.mostrarEstracto');
 				mostrarEstracto.innerHTML = e.target.value;
+				if(e.target.value){
+					document.getElementById('vista_previa').style.display="block";
+				};
 			},
 			typingDesc(e){
-				console.log(e.target.value);
 				const mostrarDescripcion = document.querySelector('.mostrarDescripcion');
 				mostrarDescripcion.innerHTML = e.target.value;
+				if(e.target.value){
+					document.getElementById('vista_previa').style.display="block";
+				};
 			},
 			addPic(e){
 				var archivo=e.target.files[0];
@@ -149,10 +159,29 @@
 						var cajadatos = document.getElementById('mostrarImagen');
 						var cajadatosVistaPrevia = document.getElementById('mostrarImagenVistaPrevia');
 						cajadatos.innerHTML = '<img src="'+ev.target.result+'"  width="180" height="180" class="border rounded" id="imgPost" />';
-						cajadatosVistaPrevia.innerHTML = '<img src="'+ev.target.result+'"  class="rounded-lg " style="max-width:100%;" />';
+						cajadatosVistaPrevia.innerHTML = '<img src="'+ev.target.result+'"  class="rounded-lg " style="max-height:300px;" />';
 					};                    
                 } 			
 			}							
+		},
+
+		props:{
+			route1:{
+				type: String,
+				default: 'rutaDefault.blade.php'
+			},
+			route2:{
+				type: String,
+				default: 'rutaDefault.blade.php'
+			},
+			route3:{
+				type: String,
+				default: 'rutaDefault.blade.php'
+			},
+			route4:{
+				type: String,
+				default: 'rutaDefault.blade.php'
+			}
 		}
 		
 	}
