@@ -12,6 +12,12 @@
 -donde va el estracto???
 
 
+tags(crud entero)
+
+
+zona de admin(sidebar(Componente) y todas las vistas )
+
+
 
 
 
