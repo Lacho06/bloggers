@@ -24,6 +24,22 @@ class PostController extends Controller
         return view('post.create');
     }
 
+    public function store(Request $request, $formType){
+        if($formType<1 || $formType>4){
+            //error
+        }
+        switch($formType){
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+        }
+    }
+
     public function edit(Post $post){
         return view('post.edit', compact('post'));
     }

@@ -1,44 +1,43 @@
 <template>
 	<section class="w-100" >
 
-		<div class="container bg-light rounded-lg" >
+		<div class="container rounded-lg bg-light" >
 			<div class="row">
 
-				<div class="col-12 p-2" >
+				<div class="p-2 col-12" >
 					<div class="container-fluid">
 						<div class="row justify-content-around">
-
 							<!-- form Titulo -->
-							<form action="" class="col-11 d-flex"  >
-								<input type="text" v-on:keyup="typingTit" placeholder="titulo" class="form-control my-2 p-1 tituloInput" >
-								<button type="submit" class="btn btn-sm btn-success my-1 ml-2 text-nowrap" id="submitTitle" >Add Title</button>
+							<form :action="routeTitle" class="col-11 d-flex"  >
+								<input type="text" v-on:keyup="typingTit" placeholder="titulo" class="p-1 my-2 form-control tituloInput" >
+								<button type="submit" class="my-1 ml-2 btn btn-sm btn-success text-nowrap" id="submitTitle" >Add Title</button>
 							</form>
-		
+
 							<!-- form Estracto -->
-							<form action="" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center">
-								<textarea name="" id="" rows="8" v-on:keyup="typingEst" class="form-control my-2 estractoInput" >Estracto</textarea>
-								<button type="submit" class="btn btn-sm btn-success mt-1 mb-3 mb-lg-1  text-nowrap" id="submitEst" >Add Estracto</button>
+							<form :action="routeSummary" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center">
+								<textarea name="" id="" rows="8" v-on:keyup="typingEst" class="my-2 form-control estractoInput" >Estracto</textarea>
+								<button type="submit" class="mt-1 mb-3 btn btn-sm btn-success mb-lg-1 text-nowrap" id="submitEst" >Add Estracto</button>
 							</form>
-			
+
 							<!-- form Descripcion -->
-							<form action="" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center" >
-								<textarea name="" id="" rows="8" v-on:keyup="typingDesc" class="form-control my-2 descripcionInput" >Descripcion</textarea>						
-								<button type="submit" class="btn btn-sm btn-success mt-1 mb-3 mb-lg-1  text-nowrap" id="submitDesc" >Add Description</button>
+							<form :action="routeDescription" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center" >
+								<textarea name="" id="" rows="8" v-on:keyup="typingDesc" class="my-2 form-control descripcionInput" >Descripcion</textarea>
+								<button type="submit" class="mt-1 mb-3 btn btn-sm btn-success mb-lg-1 text-nowrap" id="submitDesc" >Add Description</button>
 							</form>
-		
+
 							<!-- form Imagen -->
-							<form action="" class="col-11 col-sm-5 col-lg-3 center flex-column">
+							<form :action="routeImage" class="col-11 col-sm-5 col-lg-3 center flex-column">
 								<!-- img -->
-								<div class="center flex-column m-2" >
+								<div class="m-2 center flex-column" >
 									<div id="mostrarImagen" style="width: 180px; height:180px;" class="rounded" >
 										<!-- -------- AQUI PUEDE QUE HALLA UNA VULNERABILIDAD DEBIDO A Q ENLAZO LA FOTO CON SU RUTA TAL CUAL Y NO CON UN METODO ASSET DEBIDO A Q ESTOY EN UN COMPONENTE DE VUE --------------- -->
 										<img src="../../../public/img/img-perfil-default.png" alt="" width="180" height="180" class="border rounded" id="imgPost" >
 									</div>
 									<input type="file" name="file" id="multimediaCreate" @change="addPic" class="border-0" style="display: none; outline:0;" >
-									<button type="button" onclick="document.getElementById('multimediaCreate').click();" class="btn btn-dark mt-3">Browse...</button>
-								</div>					
+									<button type="button" onclick="document.getElementById('multimediaCreate').click();" class="mt-3 btn btn-dark">Browse...</button>
+								</div>
 								<!-- fin img -->
-								<button type="submit" class="btn  btn-success" id="submitImg" >Add Pic</button>
+								<button type="submit" class="btn btn-success" id="submitImg" >Add Pic</button>
 							</form>
 
 						</div>
@@ -47,31 +46,30 @@
 
 			</div>
 		</div>
-
 		<!-- VISTA PREVIA -->
-		<section class="container-fluid mt-5">
+		<section class="mt-5 container-fluid">
 			<div class="row">
 
 				<div class="col-10 " >
-					<h4 class="ml-5 pl-5" >Vista Previa</h4>
+					<h4 class="pl-5 ml-5" >Vista Previa</h4>
 				</div>
 
 				<!-- {{-- Vista Previa --}} -->
-				<div class="col-12 col-md-7 col-lg-9 mb-5">
+				<div class="mb-5 col-12 col-md-7 col-lg-9">
 					<div class="container">
-						<div class="row d-flex flex-column align-items-center justify-content-center mt-5">
+						<div class="mt-5 row d-flex flex-column align-items-center justify-content-center">
 
 							<div class="col-10 center" id="mostrarImagenVistaPrevia" ></div>
 
-							<div class="col-10 mh mt-4" >   
+							<div class="mt-4 col-10 mh" >
 								<div class="container-fluid">
-									<div class="row mh py-2">
+									<div class="py-2 row mh">
 
-										<div class="col-12 col-lg-3 order-last order-lg-first rounded shadow">
+										<div class="order-last rounded shadow col-12 col-lg-3 order-lg-first">
 											<div class="container-fluid">
 												<div class="row center ">
 													<div class="col-12 d-flex flex-column align-items-center ">
-														<div class="border rounded-circle my-2" style="width:55px; height:55px;" >
+														<div class="my-2 border rounded-circle" style="width:55px; height:55px;" >
 															<!-- aqui va la imagen del autor o usuario q esta creando el post -->
 															<!-- {{-- @foreach ($imgsAutor as $imgAutor)
 																@if ($imgAutor->imageable_id == $post->user_id)
@@ -86,10 +84,10 @@
 														</div>
 													</div>
 												</div>
-											</div>	
+											</div>
 										</div>
 
-										<div class="col-9 p-4">
+										<div class="p-4 col-9">
 											<h2 class="mostrarTitulo" ></h2>
 											<p><small class="text-muted mostrarEstracto" ></small></p>
 											<p class="mostrarDescripcion" ></p>
@@ -118,7 +116,7 @@
 </template>
 
 <script>
-	
+
 	export default {
 
 		methods:{
@@ -150,11 +148,29 @@
 						var cajadatosVistaPrevia = document.getElementById('mostrarImagenVistaPrevia');
 						cajadatos.innerHTML = '<img src="'+ev.target.result+'"  width="180" height="180" class="border rounded" id="imgPost" />';
 						cajadatosVistaPrevia.innerHTML = '<img src="'+ev.target.result+'"  class="rounded-lg " style="max-width:100%;" />';
-					};                    
-                } 			
-			}							
-		}
-		
+					};
+                }
+			}
+		},
+        props:{
+            routeTitle: {
+                type: String,
+                default:''
+                },
+            routeSummary:{
+                type: String,
+                default:''
+                },
+            routeDescription: {
+                type: String,
+                default:''
+                },
+            routeImage: {
+                type: String,
+                default:''
+                }
+        }
+
 	}
 
 </script>

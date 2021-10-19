@@ -8,9 +8,14 @@
 @endsection
 @section('main')
     {{-- esta vista solo se le muestra a los usuarios autenticados--}}
-
-    <div class="my-5 py-5" id="app">
-        <create-component></create-component>
+    @php
+        $titulo = "route('post.store', 1)";
+        $resumen = "route('post.store', 2)";
+        $descripcion = "route('post.store', 3)";
+        $imagen = "route('post.store', 4)";
+    @endphp
+    <div class="py-5 my-5" id="app">
+        <create-component :routeTitle="'{{$titulo}}'" :routeSummary="'{{$resumen}}'" :routeDescription="'{{$descripcion}}'" :routeImage="'{{$imagen}}'"></create-component>
     </div>
 
 @endsection
