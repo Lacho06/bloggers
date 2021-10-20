@@ -8,31 +8,39 @@
 					<div class="container-fluid">
 						<div class="row justify-content-around">
 							<!-- form Titulo -->
-							<form class="col-11 d-flex" :action="route1" >
+							<form :action="route" method="POST" enctype="multipart/form-data" class="col-11 d-flex">
+                                <slot></slot>
+                                <input type="hidden" name="formType" value="1">
 								<input type="text" name="titulo" v-on:keyup="typingTit" placeholder="titulo" class="p-1 my-2 form-control tituloInput" >
 								<button type="submit" class="my-1 ml-2 btn btn-sm btn-success text-nowrap" id="submitTitle" >Add Title</button>
 							</form>
 
 							<!-- form Estracto -->
-							<form :action="route2" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center">
-								<textarea name="estracto" id="" rows="8" v-on:keyup="typingEst" class="my-2 form-control estractoInput" >Estracto</textarea>
+							<form :action="route" method="POST" enctype="multipart/form-data" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center">
+                                <slot></slot>
+                                <input type="hidden" name="formType" value="2">
+								<textarea name="estracto" id="" rows="8" v-on:keyup="typingEst" class="my-2 form-control estractoInput" placeholder="Extracto"></textarea>
 								<button type="submit" class="mt-1 mb-3 btn btn-sm btn-success mb-lg-1 text-nowrap" id="submitEst" >Add Estracto</button>
 							</form>
 
 							<!-- form Descripcion -->
-							<form :action="route3" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center" >
-								<textarea name="descripcion" id="" rows="8" v-on:keyup="typingDesc" class="my-2 form-control descripcionInput" >Descripcion</textarea>
+							<form :action="route" method="POST" enctype="multipart/form-data" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center" >
+                                <slot></slot>
+                                <input type="hidden" name="formType" value="3">
+								<textarea name="descripcion" id="" rows="8" v-on:keyup="typingDesc" class="my-2 form-control descripcionInput" placeholder="Descripcion"></textarea>
 								<button type="submit" class="mt-1 mb-3 btn btn-sm btn-success mb-lg-1 text-nowrap" id="submitDesc" >Add Description</button>
 							</form>
 
 							<!-- form Imagen -->
-							<form :action="route4" class="col-11 col-sm-5 col-lg-3 center flex-column">
-								<!-- img -->
+							<form :action="route" method="POST" enctype="multipart/form-data" class="col-11 col-sm-5 col-lg-3 center flex-column">
+                                <slot></slot>
+                                <!-- img -->
 								<div class="m-2 center flex-column" >
 									<div id="mostrarImagen" style="width: 180px; height:180px;" class="rounded" >
 										<!-- -------- AQUI PUEDE QUE HALLA UNA VULNERABILIDAD DEBIDO A Q ENLAZO LA FOTO CON SU RUTA TAL CUAL Y NO CON UN METODO ASSET DEBIDO A Q ESTOY EN UN COMPONENTE DE VUE --------------- -->
 										<img src="../../../public/img/img-perfil-default.png" alt="" width="180" height="180" class="border rounded" id="imgPost" >
 									</div>
+                                    <input type="hidden" name="formType" value="4">
 									<input type="file" name="file" id="multimediaCreate" @change="addPic" class="border-0" style="display: none; outline:0;" >
 									<button type="button" onclick="document.getElementById('multimediaCreate').click();" class="mt-3 btn btn-dark">Browse...</button>
 								</div>
@@ -103,7 +111,12 @@
 				<!-- buttons submit -->
 				<div class="col-12 center ">
 					<div>
-						<button type="button" class="btn btn-lg btn-dark w-100" onclick="document.getElementById('submitTitle').click(); document.getElementById('submitEst').click(); document.getElementById('submitDesc').click(); document.getElementById('submitImg').click(); alert('publicado');" >PUBLICAR</button>
+						<!-- <button type="button" class="btn btn-lg btn-dark w-100" onclick="document.getElementById('submitTitle').click(); document.getElementById('submitEst').click(); document.getElementById('submitDesc').click(); document.getElementById('submitImg').click(); alert('publicado');">PUBLICAR</button> -->
+						<form :action="route" method="POST" enctype="multipart/form-data">
+                            <slot></slot>
+                            <input type="hidden" name="formType" value="5">
+                            <input type="submit" class="btn btn-lg btn-dark w-100" value="Publicar">
+                        </form>
 					</div>
 				</div>
 
@@ -164,19 +177,7 @@
 		},
 
 		props:{
-			route1:{
-				type: String,
-				default: 'rutaDefault.blade.php'
-			},
-			route2:{
-				type: String,
-				default: 'rutaDefault.blade.php'
-			},
-			route3:{
-				type: String,
-				default: 'rutaDefault.blade.php'
-			},
-			route4:{
+			route:{
 				type: String,
 				default: 'rutaDefault.blade.php'
 			}

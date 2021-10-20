@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\Image;
 use App\Models\User;
@@ -24,19 +25,32 @@ class PostController extends Controller
         return view('post.create');
     }
 
-    public function store(Request $request, $formType){
-        if($formType<1 || $formType>4){
-            //error
-        }
-        switch($formType){
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                break;
-            case 4:
-                break;
+    public function store(Request $request){
+        if($request->formType == 1){
+            //creamos el post y le establecemos un titulo, su slug y lo colocamos como borrador
+            $request->validate([
+                'titulo' => 'required|min:3|max:30'
+            ]);
+            $post = new Post();
+            $post->title = $request->titulo;
+            $post->slug = Str::slug($request->titulo);
+            $post->borrador = 1;
+            $post->user_id = auth()->user()->id;
+            $post->save();
+
+            return back();
+        }else if($request->formType == 2){
+            //le pasamos el estracto al post
+            return $request;
+        }else if($request->formType == 3){
+            //creamos un registro en la tabla textos y le ponemos el id del post
+
+        }else if($request->formType == 4){
+            //creamos un registro en la tabla images y le ponemos el id del post y la clase post
+
+        }else if($request->formType == 5){
+            //establecemos el post de borrador a publicado
+
         }
     }
 

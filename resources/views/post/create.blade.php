@@ -10,7 +10,9 @@
     {{-- esta vista solo se le muestra a los usuarios autenticados--}}
 
     <div class="py-5 my-5" id="app">
-        <create-component :route1="'{{route('home')}}'" :route2="'{{route('home')}}'" :route3="'{{route('home')}}'" :route4="'{{route('home')}}'"  ></create-component>
+        <create-component :route="'{{route('post.store')}}'">
+            {{ csrf_field() }}
+        </create-component>
     </div>
 
 @endsection

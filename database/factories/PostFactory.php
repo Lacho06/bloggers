@@ -30,6 +30,7 @@ class PostFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title),
             'summary' => $this->faker->text(250),
+            'borrador' => $this->faker->boolean(0),
             'user_id' => User::all()->random()->id
         ];
     }
