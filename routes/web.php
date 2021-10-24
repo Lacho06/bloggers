@@ -30,7 +30,10 @@ Route::get('register', [RegisterController::class, 'create'])->name('register.cr
 
 Route::post('register', [RegisterController::class, 'store'])->name('register.store');
 
+Route::get('post/create/{id?}', [PostController::class, 'create'])->middleware('auth')->name('post.create');
 
-Route::resource('post', PostController::class)->names('post');
+Route::post('post/search', [PostController::class, 'search'])->name('post.search');
 
-Route::resource('admin', AdminController::class)->names('admin');
+Route::resource('post', PostController::class)->except(['create'])->middleware('auth')->names('post');
+
+Route::resource('admin', AdminController::class)->middleware('auth')->names('admin');

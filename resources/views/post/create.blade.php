@@ -8,7 +8,6 @@
 @endsection
 @section('main')
     {{-- esta vista solo se le muestra a los usuarios autenticados--}}
-
     <div class="py-5 my-5" id="app">
         <create-component :route="'{{route('post.store')}}'">
             {{ csrf_field() }}

@@ -45,6 +45,7 @@ class RegisterController extends Controller
             $image->url = 'storage/'.$route;
 
         }else{
+            //TODO:
             //seteamos como null la img xq en el modelo tenemos un metodo q verifica si esta o no
             //vacio ese campo y en caso d estarlo en la vista colocamos la img default
             $image->url = null;
@@ -54,7 +55,7 @@ class RegisterController extends Controller
         $image->save();
         // mandamos un mensaje a la vista principal indicando q se creo con exito
         $mensaje = "Usuario creado con éxito";
-
+        session(['img' => $image->url]);
         Auth::login($user);
         return redirect()->route('home', compact('mensaje', 'user', 'image'));
     }

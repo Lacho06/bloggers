@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,13 +21,19 @@ class LoginController extends Controller
 
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $request->session()->regenerate();
+
+            $user = User::where('email', $request->email)->first();
+            //guardamos la foto de perfil en una variable de session
+            session(['img' => $user->image->url]);
+
             return redirect()->intended('/');
         }
         return redirect()->route('login.create');
     }
 
     public function destroy(){
-        //
+        Auth::logout();
+        return back();
     }
 
 

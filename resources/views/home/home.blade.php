@@ -15,7 +15,7 @@
 
 @section('main')
 
-    <section class="container-fluid mt-5 pt-5" >
+    <section class="pt-5 mt-5 container-fluid" >
         <div class="row">
 
             {{--   posts   --}}
@@ -31,16 +31,12 @@
                             @endphp
                             @foreach ($imgs as $img)
                                 @if ($img->imageable_id == $post->id && $imgPortada == true)
-                                    @php
-                                        $imgPortada = false;
-                                    @endphp
-
-                                        <div class="col-12 col-md-5 col-lg-3 mx-lg-1 my-3" >
-                                            <div class="container-fluid h-100 p-0">
-                                                <div class="row h-100 p-0  shadow rounded"> 
-                                                    <div class="col-12 col-sm-5 col-md-12 col-lg-5 bg-primary m-0 p-0 rounded-left">
-                                                        <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><img src="{{asset($img->url)}}" alt="" class="w-100 m-0 rounded-left" style="max-height:30vh;"  ></a>
-                                                    </div>    
+                                        <div class="my-3 col-12 col-md-5 col-lg-3 mx-lg-1" >
+                                            <div class="p-0 container-fluid h-100">
+                                                <div class="p-0 rounded shadow row h-100">
+                                                    <div class="p-0 m-0 col-12 col-sm-5 col-md-12 col-lg-5 bg-primary rounded-left">
+                                                        <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><img src="{{asset($img->url)}}" alt="" class="m-0 w-100 rounded-left" style="max-height:30vh;"></a>
+                                                    </div>
                                                     <div class="col-12 col-sm-7 col-md-12 col-lg-7 d-flex flex-column align-items-start justify-content-around">
                                                         <div>
                                                             <h3><a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" >{{$post->title}}</a></h3>
@@ -49,14 +45,26 @@
                                                             <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><span class="contenido-post small" >{{$post->summary}}</span></a>
                                                             <small><a href="{{route('post.show', $post)}}" class="seeMoreLink" > ..ver m&aacute;s </a></small>
                                                         </div>
-                                                        <div class="w-100 d-flex justify-content-between my-2 " >
+                                                        <div class="my-2 w-100 d-flex justify-content-between " >
                                                             <div class="d-flex align-items-center" >
-                                                                <div class="border rounded-circle mr-2" style="width:40px; height:40px;" >
+                                                                <div class="mr-2 border rounded-circle" style="width:40px; height:40px;" >
+                                                                    {{--  TODO: cambiar el condicional por if($imgAutor->url) --}}
+                                                                    @php
+                                                                        $imgSetted = false;
+                                                                    @endphp
                                                                     @foreach ($imgsAutor as $imgAutor)
                                                                         @if ($imgAutor->imageable_id == $post->user_id)
-                                                                            <img src="{{$imgAutor->getImageUrl}}" alt="Imagen del autor" class='w-100 h-100' >
+                                                                            @if ($imgAutor->url != 'storage/posts/' && $imgAutor->url != null)
+                                                                                <img src="{{asset($imgAutor->url)}}" alt="Imagen del autor" class='w-100 h-100 rounded-circle'>
+                                                                                @php
+                                                                                    $imgSetted = true;
+                                                                                @endphp
+                                                                            @endif
                                                                         @endif
                                                                     @endforeach
+                                                                    @if ($imgSetted == false)
+                                                                        <img src="{{asset('images/img-perfil-default.png')}}" alt="Imagen del autor" class='w-100 h-100 rounded-circle'>
+                                                                    @endif
                                                                 </div>
                                                                 <div class="d-flex flex-column align-items-start justify-content-around" >
                                                                     <span style="font-size:70%; font-weight:bold;" >{{$post->user->name}}</span>
@@ -64,54 +72,68 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>                                           
+                                                    </div>
                                                 </div>
-                                            </div>                                    
+                                            </div>
                                         </div>
-
+                                        @php
+                                            $imgPortada = false;
+                                        @endphp
                                 @endif
                             @endforeach
-                            {{-- sino encuentra una imagen se le coloca un color de fondo x defecto --}}
-                            @if ($imgPortada)
+                                {{-- si no encuentra una imagen se le coloca un color de fondo x defecto --}}
+                                @if ($imgPortada)
 
-                                        <div class="col-12 col-md-5 col-lg-3 mx-lg-1 my-3" >                                            
-                                            <div class="container-fluid h-100 p-0">
-                                                <div class="row h-100 p-0  shadow rounded bg-light">
-                                                    <div class="col-12 d-flex flex-column align-items-start justify-content-around">                                                            
-                                                        <div>
-                                                            <h3><a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" >{{$post->title}}</a></h3>
-                                                        </div>
-                                                        <div>
-                                                            <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><span class="contenido-post small" >{{$post->summary}}</span></a>
-                                                            <small><a href="{{route('post.show', $post)}}" class="seeMoreLink" > ..ver m&aacute;s </a></small>
-                                                        </div>
-                                                        <div class="w-100 d-flex justify-content-between my-2 " >
-                                                            <div class="d-flex align-items-center" >
-                                                                <div class="border rounded-circle mr-2" style="width:40px; height:40px;" >
-                                                                    @foreach ($imgsAutor as $imgAutor)
-                                                                        @if ($imgAutor->imageable_id == $post->user_id)
-                                                                            <img src="{{$imgAutor->getImageUrl}}" alt="Imagen del autor" class='w-100 h-100' >
+                                            <div class="my-3 col-12 col-md-5 col-lg-3 mx-lg-1" >
+                                                <div class="p-0 container-fluid h-100">
+                                                    <div class="p-0 rounded shadow row h-100">
+                                                        <div class="col-12 d-flex flex-column align-items-start justify-content-around">
+                                                            <div>
+                                                                <h3><a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" >{{$post->title}}</a></h3>
+                                                            </div>
+                                                            <div>
+                                                                <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><span class="contenido-post small" >{{$post->summary}}</span></a>
+                                                                <small><a href="{{route('post.show', $post)}}" class="seeMoreLink" > ..ver m&aacute;s </a></small>
+                                                            </div>
+                                                            <div class="my-2 w-100 d-flex justify-content-between " >
+                                                                <div class="d-flex align-items-center" >
+                                                                    <div class="mr-2 border rounded-circle" style="width:40px; height:40px;" >
+                                                                        {{--  TODO: cambiar el condicional por if($imgAutor->url) --}}
+                                                                        @php
+                                                                            $imgSetted = false;
+                                                                        @endphp
+                                                                        @foreach ($imgsAutor as $imgAutor)
+                                                                            @if ($imgAutor->imageable_id == $post->user_id)
+                                                                                @if ($imgAutor->url != 'storage/posts/' && $imgAutor->url != null)
+                                                                                    <img src="{{asset($imgAutor->url)}}" alt="Imagen del autor" class='w-100 h-100 rounded-circle'>
+                                                                                    @php
+                                                                                        $imgSetted = true;
+                                                                                    @endphp
+                                                                                @endif
+                                                                            @endif
+                                                                        @endforeach
+                                                                        @if ($imgSetted == false)
+                                                                            <img src="{{asset('images/img-perfil-default.png')}}" alt="Imagen del autor" class='w-100 h-100 rounded-circle'>
                                                                         @endif
-                                                                    @endforeach
-                                                                </div>
-                                                                <div class="d-flex flex-column align-items-start justify-content-around" >
-                                                                    <span style="font-size:70%; font-weight:bold;" >{{$post->user->name}}</span>
-                                                                    <span class="text-muted" style="font-size:80%;" >{{$post->created_at->diffForHumans()}}</span>
+                                                                    </div>
+                                                                    <div class="d-flex flex-column align-items-start justify-content-around" >
+                                                                        <span style="font-size:70%; font-weight:bold;" >{{$post->user->name}}</span>
+                                                                        <span class="text-muted" style="font-size:80%;" >{{$post->created_at->diffForHumans()}}</span>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>                                          
+                                                    </div>
                                                 </div>
-                                            </div>  
-                                        </div>
+                                            </div>
 
-                            @endif
+                                @endif
                         @endforeach
 
                     </div>
                 </div>
             </div>
-            
+
 
         </div>
     </section>
