@@ -49,6 +49,11 @@
                                                             <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><span class="contenido-post small" >{{$post->summary}}</span></a>
                                                             <small><a href="{{route('post.show', $post)}}" class="seeMoreLink" > ..ver m&aacute;s </a></small>
                                                         </div>
+                                                        <div class="w-100 d-flex justify-content-start my-2 " >
+                                                            <div class="badge-pill py-1 px-1 m-2 bg-success" ><small>LifeStyle</small></div>
+                                                            <div class="badge-pill py-1 px-1 m-2 bg-info" ><small>home</small></div>
+                                                            <div class="badge-pill py-1 px-1 m-2 bg-warning" ><small>ropa y moda</small></div>
+                                                        </div>
                                                         <div class="w-100 d-flex justify-content-between my-2 " >
                                                             <div class="d-flex align-items-center" >
                                                                 <div class="border rounded-circle mr-2" style="width:40px; height:40px;" >
@@ -85,6 +90,11 @@
                                                             <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><span class="contenido-post small" >{{$post->summary}}</span></a>
                                                             <small><a href="{{route('post.show', $post)}}" class="seeMoreLink" > ..ver m&aacute;s </a></small>
                                                         </div>
+                                                        <div class="w-100 d-flex justify-content-start my-2 " >
+                                                            <div class="badge-pill py-1 px-1 m-2 bg-success" ><small>LifeStyle</small></div>
+                                                            <div class="badge-pill py-1 px-1 m-2 bg-info" ><small>home</small></div>
+                                                            <div class="badge-pill py-1 px-1 m-2 bg-warning" ><small>ropa y moda</small></div>
+                                                        </div>
                                                         <div class="w-100 d-flex justify-content-between my-2 " >
                                                             <div class="d-flex align-items-center" >
                                                                 <div class="border rounded-circle mr-2" style="width:40px; height:40px;" >
@@ -94,12 +104,12 @@
                                                                         @endif
                                                                     @endforeach
                                                                 </div>
-                                                                <div class="d-flex flex-column align-items-start justify-content-around" >
+                                                                <div class="d-flex flex-column align-items-start justify-content-around  "  >
                                                                     <span style="font-size:70%; font-weight:bold;" >{{$post->user->name}}</span>
                                                                     <span class="text-muted" style="font-size:80%;" >{{$post->created_at->diffForHumans()}}</span>
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div>                                                        
                                                     </div>                                          
                                                 </div>
                                             </div>  

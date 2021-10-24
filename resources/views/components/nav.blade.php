@@ -1,6 +1,6 @@
     <header class="container-fluid" >
         <!-- menu de navegacion -->
-        <nav class="navbar navbar-expand-md bg-light  navbar-light fixed-top " >
+        <nav class="navbar navbar-expand-md bg-light navbar-light fixed-top " >
 
             <a href="{{route('home')}}"  class="navbar-brand" >Bloggers</a>
 
@@ -13,7 +13,7 @@
                 <ul class="navbar-nav align-items-center" >
                     <li class="nav-item" ><a href="{{route('post.create')}}" class="nav-link">Crear Post</a></li>
                     <li class="nav-item" ><a href="{{route('post.index')}}" class="nav-link">Ver mis Posts</a></li>
-                    <li class="nav-item dropdown" ><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" ><span class="rounded-circle" style="width: 37px; height:37px;" ><img src="{{asset('images/img-perfil-default.png')}}" class="rounded-circle" style="width: 37px; height:37px;" alt=""></span></a>                                                                                                                      
+                    <li class="nav-item dropdown center flex-column" ><a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" ><span class="rounded-circle" style="width: 37px; height:37px;" ><img src="{{asset('images/img-perfil-default.png')}}" class="rounded-circle" style="width: 37px; height:37px;" alt=""></span></a>                                                                                                                      
 
                         <div class="dropdown-menu " >
                             <a href="#" class="dropdown-item"  >Profile</a>

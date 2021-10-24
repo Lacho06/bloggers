@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 
@@ -34,3 +35,7 @@ Route::post('register', [RegisterController::class, 'store'])->name('register.st
 Route::resource('post', PostController::class)->names('post');
 
 Route::resource('admin', AdminController::class)->names('admin');
+
+Route::resource('tag', TagController::class)->names('tag');
+
+
