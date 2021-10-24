@@ -84,9 +84,6 @@ class PostController extends Controller
 
 
     public function show(Post $post){
-        //TODO: para controlar el orden d los textos y las imagenes a la hora d colocarlos necesito crear
-        //una tabla llamada orden_posts o algo asi q va a guardar el post_id, text_id, image_id y order
-
         $imgAutor = Image::where('imageable_id', $post->user_id)->where('imageable_type', 'LIKE', User::class)->first();
         $imgs = Image::where('imageable_id', $post->id)->where('imageable_type', 'LIKE', Post::class)->get();
         // falta enviar a la vista los post relacionados

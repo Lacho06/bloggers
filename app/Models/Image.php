@@ -17,4 +17,8 @@ class Image extends Model
         return $this->morphTo();
     }
 
+    public function orderPost(){
+        return $this->morphOne(OrderPost::class, "itemable");
+    }
+
 }
