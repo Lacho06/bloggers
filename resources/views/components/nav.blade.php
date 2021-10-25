@@ -12,11 +12,23 @@
 
                 <ul class="navbar-nav align-items-center" >
                     @if (auth()->user())
-
-                        <li class="nav-item" ><a href="{{route('post.create')}}" class="nav-link">Crear Post</a></li>
-                        <li class="nav-item" ><a href="{{route('post.index')}}" class="nav-link">Ver mis Posts</a></li>
-                        <li class="nav-item dropdown" >
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" >
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Posts</a>
+                            <div class="dropdown-menu">
+                                <a href="{{route('post.create')}}" class="dropdown-item nav-link">Crear Post</a>
+                                <a href="{{route('post.index')}}" class="dropdown-item border-top nav-link">Ver mis Posts</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Tags</a>
+                            <div class="dropdown-menu">
+                                <a href="{{route('tag.create')}}" class="dropdown-item">Crear Tag</a>
+                                <a href="{{route('tag.userTags')}}" class="dropdown-item border-top">Ver mis Tags</a>
+                                <a href="#" class="dropdown-item border-top">Asignar Tag</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                                 <span class="rounded-circle" style="width: 37px; height:37px;">
                                     @php
                                         $img = session('img');
@@ -36,10 +48,10 @@
                                     {{auth()->user()->name}}
                                 @endif
                             </a>
-                            <div class="dropdown-menu " >
-                                <a href="#" class="dropdown-item"  >Profile</a>
-                                <a href="#" class="dropdown-item"  >Account</a>
-                                <a href="{{route('login.destroy')}}" class="dropdown-item border-top"  >Logout</a>
+                            <div class="dropdown-menu">
+                                <a href="#" class="dropdown-item">Profile</a>
+                                <a href="#" class="dropdown-item">Account</a>
+                                <a href="{{route('login.destroy')}}" class="dropdown-item border-top">Logout</a>
                             </div>
 
                         </li>

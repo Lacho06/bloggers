@@ -45,6 +45,11 @@
                                                             <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><span class="contenido-post small" >{{$post->summary}}</span></a>
                                                             <small><a href="{{route('post.show', $post)}}" class="seeMoreLink" > ..ver m&aacute;s </a></small>
                                                         </div>
+                                                        <div class="my-2 w-100 d-flex justify-content-start " >
+                                                            <div class="px-1 py-1 m-2 badge-pill bg-success" ><small>LifeStyle</small></div>
+                                                            <div class="px-1 py-1 m-2 badge-pill bg-info" ><small>home</small></div>
+                                                            <div class="px-1 py-1 m-2 badge-pill bg-warning" ><small>ropa y moda</small></div>
+                                                        </div>
                                                         <div class="my-2 w-100 d-flex justify-content-between " >
                                                             <div class="d-flex align-items-center" >
                                                                 <div class="mr-2 border rounded-circle" style="width:40px; height:40px;" >

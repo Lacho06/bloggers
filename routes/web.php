@@ -4,6 +4,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 
@@ -37,3 +38,9 @@ Route::post('post/search', [PostController::class, 'search'])->name('post.search
 Route::resource('post', PostController::class)->except(['create'])->middleware('auth')->names('post');
 
 Route::resource('admin', AdminController::class)->middleware('auth')->names('admin');
+
+Route::get('tags', [TagController::class, 'userTags'])->middleware('auth')->name('tag.userTags');
+
+Route::resource('tag', TagController::class)->middleware('auth')->names('tag');
+
+//TODO: para ver un post no es necesario estar auth arreglar eso

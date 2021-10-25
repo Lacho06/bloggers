@@ -74,7 +74,7 @@ class PostController extends Controller
             //establecemos el post de borrador a publicado
             return $request;
         }
-        //redireccionar al home y mandar un mensaje de error inesperado
+        //redireccionar al home y mandar un mensaje de error inesperado usando sesiones
         return null;
     }
 
