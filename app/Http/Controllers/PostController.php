@@ -84,8 +84,9 @@ class PostController extends Controller
 
 
     public function show(Post $post){
-        $imgAutor = Image::where('imageable_id', $post->user_id)->where('imageable_type', 'LIKE', User::class)->first();
-        $imgs = Image::where('imageable_id', $post->id)->where('imageable_type', 'LIKE', Post::class)->get();
+        //inicializamos las variables para q en caso de q no existan no arroje error
+        $imgAutor = null;
+        $imgs = [];
         // falta enviar a la vista los post relacionados
         $totalImgs = Image::select('*')->get();
         foreach($totalImgs as $item){

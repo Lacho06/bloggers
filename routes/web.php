@@ -35,7 +35,9 @@ Route::get('post/create/{id?}', [PostController::class, 'create'])->middleware('
 
 Route::post('post/search', [PostController::class, 'search'])->name('post.search');
 
-Route::resource('post', PostController::class)->except(['create'])->middleware('auth')->names('post');
+Route::get('post/{post}', [PostController::class, 'show'])->name('post.show');
+
+Route::resource('post', PostController::class)->except(['create', 'show'])->middleware('auth')->names('post');
 
 Route::resource('admin', AdminController::class)->middleware('auth')->names('admin');
 
