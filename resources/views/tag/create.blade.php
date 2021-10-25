@@ -1,14 +1,14 @@
 @extends('plantilla-base')
-@section('title', "Tag")
+@section('title', "Create Tag")
 @section('css')
 
 @endsection
 @section('header')
-
+    <x-nav></x-nav>
 @endsection
 @section('main')
 
-    <div class="container my-5">
+    <div class="container my-5 py-5 ">
         <div class="row center" >
             <div class="p-4 col-8 bg-light">
                 <form action="" class="border-0 form container-fluid " >

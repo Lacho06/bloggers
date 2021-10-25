@@ -17,19 +17,14 @@
 
                 <table class="table  table-hover table-sm border" >
                     <thead>
-                        <th>id</th>
-                        <th>Title</th>
-                        <th>Summary</th>
+                        <th>Nombre</th>
                         <th></th>
                     </thead>
                     <tbody>
                         @foreach ($posts as $post)
                             <tr>
-                                <td>{{$post->id}}</td>
-                                <td>{{$post->title}}</td>
-                                <td>{{$post->summary}}</td>
+                                <td>nombre 1</td>
                                 <td class="d-flex" >
-                                    <a href="{{route('post.show', $post)}}"><span class="mx-2" style="cursor: pointer;" ><img src="{{asset('img/icons/eye/outline_visibility_black_18dp.png')}}" alt=""></span></a>
                                     <a href="{{route('post.edit', $post)}}"><span class="mx-2" style="cursor: pointer;" ><img src="{{asset('img/icons/pencil/outline_edit_black_18dp.png')}}" alt=""></span></a>
                                     <form action="{{route('post.destroy', $post)}}" method="POST">
                                         @csrf @method('delete')
@@ -56,3 +51,9 @@
 @section('js')
 
 @endsection
+
+
+
+
+
+

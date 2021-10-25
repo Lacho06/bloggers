@@ -1,6 +1,6 @@
     <header class="container-fluid" >
         <!-- menu de navegacion -->
-        <nav class="navbar navbar-expand-md bg-light navbar-light fixed-top " >
+        <nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top " >
 
             <a href="{{route('home')}}"  class="navbar-brand" >Bloggers</a>
 
@@ -8,7 +8,7 @@
                 <span class="navbar-toggler-icon" ></span>
             </button>
 
-            <div class="collapse navbar-collapse d-md-flex justify-content-end" id="menu_collapse" >
+            <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="menu_collapse" >
 
                 <ul class="navbar-nav align-items-center" >
                     @if (auth()->user())
