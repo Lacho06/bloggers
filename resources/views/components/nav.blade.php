@@ -1,6 +1,6 @@
     <header class="container-fluid" >
         <!-- menu de navegacion -->
-        <nav class="navbar navbar-expand-md bg-light navbar-light fixed-top " >
+        <nav class="navbar navbar-expand-lg bg-light navbar-light fixed-top " >
 
             <a href="{{route('home')}}"  class="navbar-brand" >Bloggers</a>
 
@@ -8,7 +8,7 @@
                 <span class="navbar-toggler-icon" ></span>
             </button>
 
-            <div class="collapse navbar-collapse d-md-flex justify-content-end" id="menu_collapse" >
+            <div class="collapse navbar-collapse d-lg-flex justify-content-end" id="menu_collapse" >
 
                 <ul class="navbar-nav align-items-center" >
                     <li class="nav-item" ><a href="{{route('post.create')}}" class="nav-link">Crear Post</a></li>
@@ -25,7 +25,7 @@
 
                     <form action="buscar.php" method="post" class="form-inline "   >
                         <input type="search" placeholder="Buscar" class="form-control mr-sm-2 badge-pill"  >
-                        <button type="submit" class="btn btn-dark mt-2 mt-md-0 badge-pill" >Buscar</button>
+                        <button type="submit" class="btn btn-dark mt-2 mt-lg-0 badge-pill" >Buscar</button>
                     </form>
 
                 </ul>

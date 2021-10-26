@@ -60,9 +60,16 @@
         align-items :center;
     }
 
-    .cap {
-        background :rgb(0,0,0,0.95);
-        background :rgba(0,0,0,0.95);
+    .icon {
+        display: inline-block;
+        width: 1em;
+        height: 1em;
+        stroke-width: 0;
+        stroke: currentColor;
+        fill: currentColor;
+    }
+
+    .cap {        
         z-index :2;
     }
 
@@ -137,6 +144,22 @@
     <script src="{{asset('js/jquery-3.5.1.js')}}"></script>
     <script src="{{asset('js/popper.js')}}"></script>
     <script src="{{asset('js/bootstrap.min.js')}}"></script>
+
+     {{-- activar toast --}}
+    <script >
+        $(document).ready(function(){
+            $('.toast').toast('show');
+            
+            $('#btnToasts').click(function(){
+                $('#mitoast').toast('show');
+            });
+            
+            $('#btnOcultar').click(function(){
+                $('#mitoast').toast('hide');
+            });
+            
+        });
+    </script>
 
     {{--  Bootstrap 4 scripts  --}}
 

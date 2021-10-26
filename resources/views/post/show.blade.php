@@ -1,5 +1,5 @@
 @extends('plantilla-base')
-@section('title', "Post")
+@section('title', "Show Post")
 @section('css')
 
 @endsection
@@ -8,7 +8,7 @@
 @endsection
 @section('main')
 
-    <section class="container-fluid mt-5">
+    <section class="container-fluid mt-5 pt-5 ">
         <div class="row">
             {{-- Post details --}}
             <div class="col-12 col-md-7 col-lg-9 mb-5">

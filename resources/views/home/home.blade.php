@@ -15,6 +15,10 @@
 
 @section('main')
 
+    <x-alert type={{false}} >
+        false
+    </x-alert>
+
     <section class="container-fluid mt-5 pt-5" >
         <div class="row">
 
@@ -37,7 +41,13 @@
 
                                         <div class="col-12 col-md-5 col-lg-3 mx-lg-1 my-3" >
                                             <div class="container-fluid h-100 p-0">
-                                                <div class="row h-100 p-0  shadow rounded"> 
+                                                <div class="row h-100 p-0  shadow rounded position-relative PostWithOutImage " >
+                                                    <div class="w-100 cap position-absolute d-flex align-items-end " style="bottom:0; height:30px;" >
+                                                        <div class="d-flex mb-1" >
+                                                            <small class="mx-2" ><a href="" class="text-white" >tag1</a></small>
+                                                            <small class="mx-2" ><a href="" class="text-white" >tag2</a></small>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-12 col-sm-5 col-md-12 col-lg-5 bg-primary m-0 p-0 rounded-left">
                                                         <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><img src="{{asset($img->url)}}" alt="" class="w-100 m-0 rounded-left" style="max-height:30vh;"  ></a>
                                                     </div>    
@@ -48,12 +58,7 @@
                                                         <div>
                                                             <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><span class="contenido-post small" >{{$post->summary}}</span></a>
                                                             <small><a href="{{route('post.show', $post)}}" class="seeMoreLink" > ..ver m&aacute;s </a></small>
-                                                        </div>
-                                                        <div class="w-100 d-flex justify-content-start my-2 " >
-                                                            <div class="badge-pill py-1 px-1 m-2 bg-success" ><small>LifeStyle</small></div>
-                                                            <div class="badge-pill py-1 px-1 m-2 bg-info" ><small>home</small></div>
-                                                            <div class="badge-pill py-1 px-1 m-2 bg-warning" ><small>ropa y moda</small></div>
-                                                        </div>
+                                                        </div>                                                        
                                                         <div class="w-100 d-flex justify-content-between my-2 " >
                                                             <div class="d-flex align-items-center" >
                                                                 <div class="border rounded-circle mr-2" style="width:40px; height:40px;" >
@@ -81,7 +86,13 @@
 
                                         <div class="col-12 col-md-5 col-lg-3 mx-lg-1 my-3" >                                            
                                             <div class="container-fluid h-100 p-0">
-                                                <div class="row h-100 p-0  shadow rounded bg-light">
+                                                <div class="row h-100 p-0  shadow rounded bg-light position-relative PostWithOutImage ">
+                                                    <div class="w-100 cap position-absolute d-flex align-items-end " style="bottom:0; height:30px;" >
+                                                        <div class="d-flex mb-1" >
+                                                            <small class="mx-2" ><a href="" class="text-white" >tag1</a></small>
+                                                            <small class="mx-2" ><a href="" class="text-white" >tag2</a></small>
+                                                        </div>
+                                                    </div>
                                                     <div class="col-12 d-flex flex-column align-items-start justify-content-around">                                                            
                                                         <div>
                                                             <h3><a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" >{{$post->title}}</a></h3>
@@ -89,12 +100,7 @@
                                                         <div>
                                                             <a href="{{route('post.show', $post)}}" class="text-decoration-none text-dark" ><span class="contenido-post small" >{{$post->summary}}</span></a>
                                                             <small><a href="{{route('post.show', $post)}}" class="seeMoreLink" > ..ver m&aacute;s </a></small>
-                                                        </div>
-                                                        <div class="w-100 d-flex justify-content-start my-2 " >
-                                                            <div class="badge-pill py-1 px-1 m-2 bg-success" ><small>LifeStyle</small></div>
-                                                            <div class="badge-pill py-1 px-1 m-2 bg-info" ><small>home</small></div>
-                                                            <div class="badge-pill py-1 px-1 m-2 bg-warning" ><small>ropa y moda</small></div>
-                                                        </div>
+                                                        </div>                                                        
                                                         <div class="w-100 d-flex justify-content-between my-2 " >
                                                             <div class="d-flex align-items-center" >
                                                                 <div class="border rounded-circle mr-2" style="width:40px; height:40px;" >
@@ -153,4 +159,32 @@
             }
         });
     </script>
+
+    <script>
+        window.addEventListener('load' , ()=>{
+            caps = document.querySelectorAll('.cap');
+            PostWithOutImage = document.querySelectorAll('.PostWithOutImage');
+
+            for (let i = 0; i < PostWithOutImage.length; i++) { 
+                caps[i].style.textIndent = '-9999px'; 
+                caps[i].style.transition = 'all 250ms ease';               
+                PostWithOutImage[i].addEventListener('mouseover' , function (){
+                    caps[i].style.transition = 'all 250ms ease';
+                    caps[i].style.background = '-webkit-linear-gradient(top, rgba(235,235,235) , rgba(0,0,0,0.3) )';
+                    caps[i].style.background = '-moz-linear-gradient(top, rgba(235,235,235) , rgba(0,0,0,0.3) )';
+                    caps[i].style.background = 'linear-gradient(top, rgba(235,235,235) , rgba(0,0,0,0.3) )';
+                    caps[i].style.color = 'rgb(255,255,255)';
+                    caps[i].style.textIndent = '0';
+                });
+                PostWithOutImage[i].addEventListener('mouseout' , function (){
+                    caps[i].style.transition = 'all 250ms ease';
+                    caps[i].style.background = 'transparent';
+                    caps[i].style.textIndent = '-9999px';
+                });
+            };
+
+        });
+        
+    </script>
+
 @endsection

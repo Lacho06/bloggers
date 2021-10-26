@@ -1,5 +1,5 @@
 @extends('plantilla-base')
-@section('title', "Post")
+@section('title', "Create Post")
 @section('css')
     <style>
         *{
@@ -70,19 +70,10 @@
                                     <button type="submit" class="btn btn-success" id="submitImg" >Add Pic</button>
                                 </form>
 
-                                <!-- form Tags -->
-                                <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data" class="col-11 col-sm-5 col-lg-3 d-flex flex-column center" >
-                                    @csrf                    
-                                    <input type="hidden" name="formType" value="5">
-                                    <select name="tag" id="" class="p-2 rounded m-3 bg-dark text-light" >
-                                        <option value="default" >SELECT TAG</option>
-                                        <option value="tag1" >Tag1</option>
-                                        <option value="tag2" >Tag2</option>
-                                        <option value="tag3" >Tag3</option>
-                                        <option value="tag4" >Tag4</option>
-                                    </select>
-                                    <button type="submit" class="mt-1 mb-3 btn btn-sm btn-success mb-lg-1 text-nowrap" id="submitDesc" >Add Tag</button>
-                                </form>
+                                <!-- btn Tags -->
+                                <div class="center" >
+                                    <button type="button" class="btn btn-outline-dark text-uppercase" data-toggle="modal" data-target="#tagModal"   >Select Tag</button> 
+                                </div>
     
                             </div>
                         </div>
@@ -163,7 +154,39 @@
             </div>
     
     
-        </section>
+        </section>          
+            
+
+        {{-- TAG MODAL --}}
+        <div id="tagModal" class="modal fade" >
+            <div class="modal-dialog" >
+                <div class="modal-content" >
+                    <div class="modal-header" >
+                        <h4 class="modal-title" >Select Tag</h4>
+                        <button type="button" class="close" data-dismiss="modal"  >&times;</button> 
+                    </div>
+                    <div class="modal-body" >
+                        <form action="{{route('post.store')}}" method="POST" enctype="multipart/form-data" class="form center flex-column" >
+                            @csrf                    
+                            <input type="hidden" name="formType" value="5">
+                            <select name="tag" id="" class="form-control " >
+                                <option value="default" >SELECT TAG</option>
+                                <option value="tag1" >Tag1</option>
+                                <option value="tag2" >Tag2</option>
+                                <option value="tag3" >Tag3</option>
+                                <option value="tag4" >Tag4</option>
+                            </select>
+                            <button type="submit" class="mx-auto my-2 btn btn-sm btn-success" id="submitTag" >Add Tag</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer" >
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"  >Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div> 
+                
+
 
     {{-- <div class="py-5 my-5" id="app">
         <create-component :route="'{{route('post.store')}}'">
