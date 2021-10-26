@@ -15,8 +15,8 @@
 
 @section('main')
 
-    <x-alert type={{false}} >
-        false
+    <x-alert type={{true}} >
+        Ejemplo
     </x-alert>
 
     <section class="pt-5 mt-5 container-fluid" >

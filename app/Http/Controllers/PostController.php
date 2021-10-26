@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Post;
 use App\Models\Image;
+use App\Models\OrderPost;
 use App\Models\User;
 use App\Models\Text;
 use App\Models\Tag;
@@ -35,11 +36,12 @@ class PostController extends Controller
 
 
     public function create($id=null){
+        $tags = Tag::where('user_id', auth()->user()->id)->get();
         if($id != null){
             $post = Post::find($id);
-            return view('post.create', compact('post'));
+            return view('post.create', compact('post', 'tags'));
         }
-        return view('post.create');
+        return view('post.create', compact('tags'));
     }
 
     public function store(Request $request){
@@ -63,14 +65,57 @@ class PostController extends Controller
             return redirect()->route('post.create', compact('id'));
         }else if($request->formType == 2){
             //le pasamos el estracto al post
-            return $request;
+            $post = Post::find($request->post_id);
+            $post->summary = $request->estracto;
+            $post->save();
+            $id = $post->id;
+            return redirect()->route('post.create', compact('id'));
         }else if($request->formType == 3){
             //creamos un registro en la tabla textos y le ponemos el id del post
-            return $request;
+            $id = $request->post_id;
+            $order = 0;
+            $text = new Text();
+            $text->text = $request->descripcion;
+            $text->post_id = $id;
+            $text->save();
+            //buscamos en la db si hay un orden con el id del post q estamos trabajando
+            $orderPost = OrderPost::where('post_id', $id)->get();
+            //si encuentra entonces contamos la cantidad y colocamos d id la cantidad mas 1
+            foreach($orderPost as $item){
+                $order++;
+            }
+            //si no encuentra le colocamos el id 1
+            $orden = new OrderPost();
+            $orden->post_id = $id;
+            $orden->itemable_id = $text->id;
+            $orden->itemable_type = Text::class;
+            $orden->order = $order+1;
+            $orden->save();
+
+            return redirect()->route('post.create', compact('id'));
         }else if($request->formType == 4){
             //creamos un registro en la tabla images y le ponemos el id del post y la clase post
             return $request;
         }else if($request->formType == 5){
+            //establecemos los tags del post
+            $contador = 0;
+            $tag_selected = Tag::find($request->tag);
+            $post = Post::find($request->post_id);
+            $id = $request->post_id;
+            foreach($post->tags() as $item){
+                $contador++;
+            }
+            if($contador>=2){
+                //TODO: mandamos un mensaje d error xq solo se pueden agregar hasta dos tags a un post
+                return redirect()->route('post.create', compact('id'));
+            }else{
+                $post->tags()->attach([
+                    $tag_selected->id
+                ]);
+                // TODO: mandamos un mensaje de tag agregado
+                return redirect()->route('post.create', compact('id'));
+            }
+        }else if($request->formType == 6){
             //establecemos el post de borrador a publicado
             return $request;
         }

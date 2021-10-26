@@ -4,27 +4,29 @@
 
 @endsection
 @section('header')
-    <x-nav></x-nav>
+    <x-nav/>
 @endsection
 @section('main')
 
-    <div class="container my-5 py-5 ">
-        <div class="row center" >
+    <div class="container py-5 my-5 ">
+        <div class="row center">
             <div class="p-4 col-8 bg-light">
-                <form action="" class="border-0 form container-fluid " >
-                    <div class="row justify-content-around ">
+                <form action="{{route('tag.store')}}" method="POST" class="border-0 form container-fluid">
+                    @csrf
+                    <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                    <div class="row justify-content-around">
                         <div class="col-4">
-                            <input type="text" name="tag" id="" class="form-control" placeholder="Nombre de la etiqueta" >
+                            <input type="text" name="name" class="form-control" placeholder="Nombre de la etiqueta">
                         </div>
                         <div class="col-4">
-                            <label class="center" >
+                            <label class="center">
                                 Color:&nbsp;
-                                <input type="color" name="color" id="" value="#000" placeholder="Selecciona un color">
+                                <input type="color" name="color" value="#000" placeholder="Selecciona un color">
                             </label>
                         </div>
                         <div class="col-12">
-                            <div class="my-4 center" >
-                                <button type="submit" class="btn btn-success text-capitalize align-self-end " >Crear</button>
+                            <div class="my-4 center">
+                                <button type="submit" class="btn btn-success text-capitalize align-self-end">Crear</button>
                             </div>
                         </div>
                     </div>

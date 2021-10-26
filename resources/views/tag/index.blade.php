@@ -8,16 +8,18 @@
 @endsection
 @section('main')
 
-<section class="container my-5 py-5">
+<section class="container py-5 my-5">
     <div class="row">
         <div class="col-12">
 
-            <table class="table  table-hover table-sm border" >
+            <table class="table border table-hover table-sm" >
                 <thead>
                     <th>id</th>
                     <th>Title</th>
+                    <th>Actions</th>
                 </thead>
                 <tbody>
+
 
                         <tr>
                             <td>1</td>

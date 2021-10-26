@@ -43,6 +43,4 @@ Route::resource('admin', AdminController::class)->middleware('auth')->names('adm
 
 Route::get('tags', [TagController::class, 'userTags'])->middleware('auth')->name('tag.userTags');
 
-Route::resource('tag', TagController::class)->middleware('auth')->names('tag');
-
-//TODO: para ver un post no es necesario estar auth arreglar eso
+Route::resource('tag', TagController::class)->except(['show'])->middleware('auth')->names('tag');
