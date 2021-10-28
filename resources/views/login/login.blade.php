@@ -29,7 +29,7 @@
                                         {!! $errors->first('password', '<small class="alert alert-danger">:message</small>') !!}
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
-                                        <a href="" class="mb-2">forget password?</a>
+                                        <a href="#passwordModal" data-toggle="modal" data-target="#passwordModal" class="mb-2">forget password?</a>
                                     </div>
                                 </div>
                             </div>
@@ -48,6 +48,33 @@
         </div>
     </div>
 </main>
+
+    {{-- FORGET PASSWORD MODAL --}}
+    <div id="passwordModal" class="modal fade" >
+        <div class="modal-dialog" >
+            <div class="modal-content" >
+                <div class="modal-header" >
+                    <h4 class="modal-title" >Forget Password?</h4>
+                    <button type="button" class="close" data-dismiss="modal" style="border:0; outline:0;" >&times;</button>
+                </div>
+                <div class="modal-body" >
+                    <form action="ruta" method="POST" enctype="multipart/form-data" class="form center flex-column" >
+                        @csrf
+                        <input type="hidden" name="post_id" value="id">
+                        <input type="email" name="email" id="email"  class="form-control my-2 " placeholder="Email" value="" >
+                        <input type="text" name="alias" id="alias"  class="form-control my-2 " placeholder="Alias" value="" >
+                        <input type="password" name="contrasena" id="contrasena" class="form-control my-2 " placeholder="New Password" >
+                        <button type="submit" class="mx-auto my-2 btn btn-sm btn-success" id="submitTag">Cambiar</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 @endsection
 @section('footer')
 

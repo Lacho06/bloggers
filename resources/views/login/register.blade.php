@@ -50,8 +50,9 @@
                             </div>
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-12 center">
+                                    <div class="col-12 center flex-column ">
                                         <button type="submit" class="btn btn-dark my-2">Sign Up</button>
+                                        <a href="route" class="btn btn-outline-secondary mt-2">Log in</a>
                                     </div>
                                 </div>
                             </div>
