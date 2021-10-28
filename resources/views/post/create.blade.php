@@ -16,6 +16,7 @@
 @endsection
 @section('main')
     {{-- esta vista solo se le muestra a los usuarios autenticados--}}
+    @auth
 
         <section class="py-5 my-5 w-100" >
 
@@ -221,7 +222,12 @@
         @endisset
 
 
-        </section>
+    @endauth
+    @guest
+        {{-- TODO: mensaje de error --}}
+    @endguest
+
+
 
 @endsection
 @section('footer')

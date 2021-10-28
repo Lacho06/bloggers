@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -37,6 +38,16 @@ class TagController extends Controller
         $tag->save();
         //TODO: falta enviar un sms de exito
         return redirect()->route('tag.userTags');
+    }
+    public function show(Tag $tag){
+        $postsRelacionados = $tag->posts()->where('tag_id', $tag->id)->get();
+        foreach($postsRelacionados as $post){
+            $userIds[] = $post->user_id;
+        }
+        foreach($userIds as $userId){
+            $users[] = User::where('id', $userId)->first();
+        }
+        return view('tag.show', compact('tag', 'postsRelacionados', 'users'));
     }
     public function create(){
         return view('tag.create');

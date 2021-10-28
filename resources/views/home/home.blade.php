@@ -43,9 +43,10 @@
                                             <div class="p-0 container-fluid h-100">
                                                 <div class="p-0 rounded shadow row h-100 position-relative PostWithOutImage " >
                                                     <div class="w-100 cap position-absolute d-flex align-items-end " style="bottom:0; height:30px;" >
-                                                        <div class="mb-1 d-flex" >
-                                                            <small class="mx-2" ><a href="" class="text-white" >tag1</a></small>
-                                                            <small class="mx-2" ><a href="" class="text-white" >tag2</a></small>
+                                                        <div class="mb-1 d-flex">
+                                                            @foreach ($post->tags as $tag)
+                                                                <small class="mx-2" ><a href="{{route('tag.show', $tag)}}" class="text-white">{{$tag->name}}</a></small>
+                                                            @endforeach
                                                         </div>
                                                     </div>
                                                     <div class="p-0 m-0 col-12 col-sm-5 col-md-12 col-lg-5 bg-primary rounded-left">
@@ -103,8 +104,9 @@
                                                     <div class="p-0 rounded shadow row h-100 position-relative PostWithOutImage ">
                                                         <div class="w-100 cap position-absolute d-flex align-items-end " style="bottom:0; height:30px;" >
                                                             <div class="mb-1 d-flex" >
-                                                                <small class="mx-2" ><a href="" class="text-white" >tag1</a></small>
-                                                                <small class="mx-2" ><a href="" class="text-white" >tag2</a></small>
+                                                                @foreach ($post->tags as $tag)
+                                                                    <small class="mx-2" ><a href="{{route('tag.show', $tag)}}" class="text-white">{{$tag->name}}</a></small>
+                                                                @endforeach
                                                             </div>
                                                         </div>
                                                         <div class="col-12 d-flex flex-column align-items-start justify-content-around">
