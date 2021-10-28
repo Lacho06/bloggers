@@ -11,6 +11,7 @@ use App\Models\OrderPost;
 use App\Models\User;
 use App\Models\Text;
 use App\Models\Tag;
+use PDO;
 
 class PostController extends Controller
 {
@@ -19,6 +20,10 @@ class PostController extends Controller
         $posts = Post::where('user_id', auth()->user()->id)->get();
 
         return view('post.index', compact('posts'));
+    }
+
+    public function borrador(){
+        return view('post.borrador');
     }
 
     public function search(Request $request){
@@ -36,6 +41,7 @@ class PostController extends Controller
 
 
     public function create($id=null){
+        //TODO: problemas con el responsive d la vista post create
         $tags = Tag::where('user_id', auth()->user()->id)->get();
         if($id != null){
             $post = Post::find($id);
@@ -45,11 +51,6 @@ class PostController extends Controller
     }
 
     public function store(Request $request){
-        //TODO: hay q eliminar el componente de vue y trabajar todo en blade
-        //tamb hay q poner un condicional a los formularios excepto al del titulo
-        //q sea if($id == null) no deje procesar el formulario y envie un mensaje
-        //para q el usuario primero escriba el titulo y si se envia el id xq ya puso
-        //el titulo entonces el formulario del titulo se inhabilite
         if($request->formType == 1){
             //creamos el post y le establecemos un titulo, su slug y lo colocamos como borrador
             $request->validate([
@@ -65,6 +66,9 @@ class PostController extends Controller
             return redirect()->route('post.create', compact('id'));
         }else if($request->formType == 2){
             //le pasamos el estracto al post
+            $request->validate([
+
+            ]);
             $post = Post::find($request->post_id);
             $post->summary = $request->estracto;
             $post->save();
@@ -95,7 +99,26 @@ class PostController extends Controller
             return redirect()->route('post.create', compact('id'));
         }else if($request->formType == 4){
             //creamos un registro en la tabla images y le ponemos el id del post y la clase post
-            return $request;
+            $id = $request->post_id;
+            $img = new Image();
+
+            if($request->file('multimediaCreate')){
+                //subimos la imagen al servidor
+                $name = time().'_'.$request->multimediaCreate->getClientOriginalName();
+                $route = $request->file('multimediaCreate')->storeAs('images', $name, 'public');
+                //guardamos en la base de datos la ruta de la imagen
+                $img->url = 'storage/'.$route;
+
+            }else{
+                //TODO: lo correcto es redireccionar a la vista create y mandar un mensaje diciendo q ocurrio un error
+                //y q vuelva a subir la img
+                $img->url = null;
+                return redirect()->route('post.create', compact('id'));
+            }
+            $img->imageable_id = $request->post_id;
+            $img->imageable_type = Post::class;
+            $img->save();
+            return redirect()->route('post.create', compact('id'));
         }else if($request->formType == 5){
             //establecemos los tags del post
             $contador = 0;
@@ -117,7 +140,10 @@ class PostController extends Controller
             }
         }else if($request->formType == 6){
             //establecemos el post de borrador a publicado
-            return $request;
+            $post = Post::find($request->post_id);
+            $post->borrador = 0;
+            $post->save();
+            return redirect()->route('post.index');
         }
         //redireccionar al home y mandar un mensaje de error inesperado usando sesiones
         return null;

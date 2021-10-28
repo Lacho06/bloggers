@@ -21,4 +21,8 @@ class HomeController extends Controller
         }
         return view('home.home', compact('posts', 'imgsAutor', 'imgs'));
     }
+
+    public function profile(){
+        return view('user.profile');
+    }
 }

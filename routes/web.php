@@ -21,6 +21,8 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+
 Route::get('login', [LoginController::class, 'create'])->name('login.create');
 
 Route::post('login', [LoginController::class, 'store'])->name('login.store');

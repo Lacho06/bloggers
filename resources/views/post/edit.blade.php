@@ -1,5 +1,5 @@
 @extends('plantilla-base')
-@section('title', "Create Post")
+@section('title', "Post")
 @section('css')
     <style>
         *{
@@ -12,7 +12,7 @@
     </style>
 @endsection
 @section('header')
-    <x-nav />
+    <x-nav></x-nav>
 @endsection
 @section('main')
     {{-- esta vista solo se le muestra a los usuarios autenticados--}}
@@ -204,31 +204,5 @@
 
 @endsection
 @section('js')
-
-    <script type="text/javascript">
-
-        function iniciar(){
-            cajadatos=document.getElementById('mostrarImagenVistaPrevia');
-            var archivos=document.getElementById('multimediaCreate');
-            archivos.addEventListener('change', procesar, false);
-        }
-        function procesar(e){
-            var archivos=e.target.files;
-            var archivo=archivos[0];
-            if(!archivo.type.match(/image.*/i)){
-                alert('seleccione una imagen');
-            }else{
-                var lector=new FileReader();
-                lector.onload=mostrar;
-                lector.readAsDataURL(archivo);
-            }
-        }
-        function mostrar(e){
-            var resultado=e.target.result;
-            cajadatos.innerHTML='<img src="'+resultado+'" style="max-height:300px;" class="rounded" />';
-        }
-        window.addEventListener('load', iniciar, false);
-
-    </script>
 
 @endsection
