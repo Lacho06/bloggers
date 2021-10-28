@@ -53,11 +53,11 @@
                                         <div class="m-2 center flex-column">
                                             <div id="mostrarImagen" style="width: 180px; height:180px;" class="rounded" >
                                                 <!-- -------- AQUI PUEDE QUE HALLA UNA VULNERABILIDAD DEBIDO A Q ENLAZO LA FOTO CON SU RUTA TAL CUAL Y NO CON UN METODO ASSET DEBIDO A Q ESTOY EN UN COMPONENTE DE VUE --------------- -->
-                                                <img src="../../../public/img/img-perfil-default.png" alt="" width="180" height="180" class="border rounded" id="imgPost" >
+                                                <img src="../../../img/img-perfil-default.png" alt="" width="180" height="180" class="border rounded" id="imgPost" >
                                             </div>
                                             <input type="hidden" name="post_id" value="{{$post->id}}">
                                             <input type="hidden" name="formType" value="4">
-                                            <input type="file" name="file" id="multimediaCreate" onchange="addPic()" class="border-0" style="display: none; outline:0;" >
+                                            <input type="file" name="multimediaCreate" id="multimediaCreate" class="border-0" style="display: none; outline:0;" >
                                             <button type="button" onclick="document.getElementById('multimediaCreate').click();" class="mt-3 btn btn-dark">Browse...</button>
                                         </div>
                                         <!-- fin img -->
@@ -66,7 +66,7 @@
 
                                     <!-- btn Tags -->
                                     <div class="my-5 center">
-                                        <button type="button" class="btn btn-outline-dark text-uppercase" data-toggle="modal" data-target="#tagModal">Select Tag</button>
+                                        <button type="button" class="btn btn-dark text-uppercase" data-toggle="modal" data-target="#tagModal">Select Tag</button>
                                     </div>
 
                                     @else
@@ -125,17 +125,17 @@
                             <h4 class="pl-5 ml-5">Vista Previa</h4>
                         </div>
 
-                        <div class="mb-5 col-12 col-md-7 col-lg-9">
+                        <div class="mb-5 col-12 ">
                             <div class="container">
                                 <div class="mt-5 row d-flex flex-column align-items-center justify-content-center">
 
-                                    <div class="col-10" id="mostrarImagenVistaPrevia"></div>
+                                    {{-- <div class="col-10" id="mostrarImagenVistaPrevia"></div> --}}
 
                                     <div class="mt-4 col-10 mh" >
                                         <div class="container-fluid">
                                             <div class="py-2 row mh">
 
-                                                <div class="p-4 col-9">
+                                                <div class="p-4 col-12 center flex-column">
                                                     <h2>{{$post->title}}</h2>
                                                     @isset($post->summary)
                                                         <p><small class="text-muted">{{$post->summary}}</small></p>
@@ -149,8 +149,8 @@
 
                                                 <div class="col-12">
                                                     <div class="container-fluid">
-                                                        <div class="row center">
-                                                            <div class="col-12 d-flex ">
+                                                        <div class="row ">
+                                                            <div class="col-6 center">
                                                                 <div class="my-2 border rounded-circle" style="width:55px; height:55px;" >
                                                                     <!-- aqui va la imagen del autor o usuario q esta creando el post -->
                                                                     {{--  @foreach ($imgsAutor as $imgAutor)
@@ -159,11 +159,25 @@
                                                                         @endif
                                                                     @endforeach  --}}
                                                                 </div>
-                                                                <div class="ml-2 d-flex flex-column align-items-start justify-content-center" >
-                                                                    <span class="text-muted" style="font-size:80%;" >Autor</span>
-                                                                    <span style="font-size:130%; font-weight:bold;" >
-                                                                        {{$post->user->name}}
-                                                                    </span>
+                                                                <div class="ml-2 center flex-column" >
+                                                                    <div class="d-flex align-items-center " >
+                                                                        <span class="text-muted mr-2 " style="font-size:80%;" >Autor </span>
+                                                                        <span style="font-size:130%; font-weight:bold;" >
+                                                                            {{$post->user->name}}
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="d-flex align-items-center " >
+                                                                        <span class="text-muted mr-2 " style="font-size:80%;" >Fecha </span>
+                                                                        <span style="font-weight:bold;" >
+                                                                            28, oct, 2021
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-6 center" >
+                                                                <div class="center " >
+                                                                    <div class="px-3 py-1 m-2 badge-pill" style="border:1px solid #17a2b8;" >Tag1</div>
+                                                                    <div class="px-3 py-1 m-2 badge-pill" style="border:1px solid #ffc107;" >Tag2</div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -233,6 +247,7 @@
 
         function iniciar(){
             cajadatos=document.getElementById('mostrarImagenVistaPrevia');
+            mostrarImagen = document.getElementById('mostrarImagen');
             var archivos=document.getElementById('multimediaCreate');
             archivos.addEventListener('change', procesar, false);
         }
@@ -247,9 +262,10 @@
                 lector.readAsDataURL(archivo);
             }
         }
-        function mostrar(e){
-            var resultado=e.target.result;
-            cajadatos.innerHTML='<img src="'+resultado+'" style="max-height:300px;" class="rounded" />';
+        function mostrar(ev){
+            var resultado=ev.target.result;
+            // cajadatos.innerHTML='<img src="'+resultado+'" style="max-height:300px;" class="rounded" />';
+            mostrarImagen.innerHTML='<img src="'+resultado+'" alt="" width="180" height="180" class="border rounded"  />';
         }
         window.addEventListener('load', iniciar, false);
 
