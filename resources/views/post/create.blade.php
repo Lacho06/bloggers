@@ -16,6 +16,7 @@
 @endsection
 @section('main')
     {{-- esta vista solo se le muestra a los usuarios autenticados--}}
+    @auth
 
         <section class="py-5 my-5 w-100" >
 
@@ -61,7 +62,7 @@
                                             <button type="button" onclick="document.getElementById('multimediaCreate').click();" class="mt-3 btn btn-dark">Browse...</button>
                                         </div>
                                         <!-- fin img -->
-                                        <button type="submit" class="btn btn-success" id="submitImg" >Add Pic</button>
+                                        <button type="submit" disabled class="btn btn-success" id="submitImg" >Add Pic</button>
                                     </form>
 
                                     <!-- btn Tags -->
@@ -150,7 +151,7 @@
                                                 <div class="col-12">
                                                     <div class="container-fluid">
                                                         <div class="row ">
-                                                            <div class="col-6 center">
+                                                            <div class="col-12 col-md-6 center">
                                                                 <div class="my-2 border rounded-circle" style="width:55px; height:55px;" >
                                                                     <!-- aqui va la imagen del autor o usuario q esta creando el post -->
                                                                     {{--  @foreach ($imgsAutor as $imgAutor)
@@ -174,7 +175,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="col-6 center" >
+                                                            <div class="col-12 col-md-6 center" >
                                                                 <div class="center " >
                                                                     <div class="px-3 py-1 m-2 badge-pill" style="border:1px solid #17a2b8;" >Tag1</div>
                                                                     <div class="px-3 py-1 m-2 badge-pill" style="border:1px solid #ffc107;" >Tag2</div>
@@ -235,7 +236,12 @@
         @endisset
 
 
-        </section>
+    @endauth
+    @guest
+        {{-- TODO: mensaje de error --}}
+    @endguest
+
+
 
 @endsection
 @section('footer')
@@ -247,6 +253,7 @@
 
         function iniciar(){
             cajadatos=document.getElementById('mostrarImagenVistaPrevia');
+            submitImg = document.getElementById('submitImg');            
             mostrarImagen = document.getElementById('mostrarImagen');
             var archivos=document.getElementById('multimediaCreate');
             archivos.addEventListener('change', procesar, false);
@@ -265,6 +272,7 @@
         function mostrar(ev){
             var resultado=ev.target.result;
             // cajadatos.innerHTML='<img src="'+resultado+'" style="max-height:300px;" class="rounded" />';
+            submitImg.disabled=false;
             mostrarImagen.innerHTML='<img src="'+resultado+'" alt="" width="180" height="180" class="border rounded"  />';
         }
         window.addEventListener('load', iniciar, false);

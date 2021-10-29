@@ -1,5 +1,5 @@
 {{--   sidebar   --}}
-            <div class="d-none d-md-flex col-md-4 col-lg-3 ">
+            <div class="col-12">
                 <div class="container">
                     <div class="row">
                         <div class="col-12 center border mh my-3 bg-secondary p-0 postSidebar" style="background: url('$img->url');" >
