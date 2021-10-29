@@ -11,6 +11,9 @@ class LoginController extends Controller
     public function create(){
         return view('login.login');
     }
+    public function forgetPassword(Request $request){
+        return $request;
+    }
 
     public function store(Request $request){
         $request->validate([

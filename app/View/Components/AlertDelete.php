@@ -4,19 +4,17 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 
-class Nav extends Component
+class AlertDelete extends Component
 {
-    public $search;
-    public $type_search;
+    public $post;
     /**
      * Create a new component instance.
      *
      * @return void
      */
-    public function __construct($search=true , $type_search=1 )
+    public function __construct($post=null)
     {
-        $this->search=$search;
-        $this->type_search=$type_search;
+        $this->post=$post;
     }
 
     /**
@@ -26,6 +24,6 @@ class Nav extends Component
      */
     public function render()
     {
-        return view('components.nav');
+        return view('components.alert-delete');
     }
 }

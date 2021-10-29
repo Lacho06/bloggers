@@ -175,13 +175,17 @@
             seeMoreLink = document.querySelectorAll('.seeMoreLink');
 
             for (let i = 0; i < contenidoPost.length; i++) {
-                seeMoreLink[0].style.display = 'none';
+                seeMoreLink[i].style.display = 'none';
                 content = contenidoPost[i].innerHTML;
                 content = content.substr(0,100);
 
                 if(contenidoPost[i].innerHTML.length>100){
                     contenidoPost[i].innerHTML = content ;
-                    seeMoreLink[0].style.display = 'inline';
+                    seeMoreLink[i].style.display = 'inline';
+                }else
+                if(contenidoPost[i].innerHTML.length==0){
+                    contenidoPost[i].innerHTML = '' ;
+                    seeMoreLink[i].style.display = 'none';
                 }else{
                     contenidoPost[i].innerHTML = content;
                 }

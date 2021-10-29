@@ -49,8 +49,7 @@
                                 @endif
                             </a>
                             <div class="dropdown-menu">
-                                <a href="#" class="dropdown-item">Profile</a>
-                                <a href="#" class="dropdown-item">Account</a>
+                                <a href="{{route('profile')}}" class="dropdown-item">Profile</a>
                                 <a href="{{route('login.destroy')}}" class="dropdown-item border-top">Logout</a>
                             </div>
 
@@ -62,12 +61,16 @@
 
                     @endif
 
+                    @if ($search)
+                        {{-- @if ($type_search) --}}
+                            <form action="{{route('post.search')}}" method="post" class="form-inline">
+                                @csrf
+                                <input type="search" placeholder="Buscar" name="search" class="form-control mr-sm-2 badge-pill">
+                                <button type="submit" class="mt-2 btn btn-dark mt-md-0 badge-pill">Buscar</button>
+                            </form>
+                        {{-- @endif --}}
+                    @endif
 
-                    <form action="{{route('post.search')}}" method="post" class="form-inline">
-                        @csrf
-                        <input type="search" placeholder="Buscar" name="search" class="form-control mr-sm-2 badge-pill">
-                        <button type="submit" class="mt-2 btn btn-dark mt-md-0 badge-pill">Buscar</button>
-                    </form>
 
                 </ul>
 

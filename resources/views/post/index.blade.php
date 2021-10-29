@@ -30,11 +30,12 @@
                                     <td class="d-flex" >
                                         <a href="{{route('post.show', $post)}}"><span class="mx-2" style="cursor: pointer;" ><img src="{{asset('img/icons/eye/outline_visibility_black_18dp.png')}}" alt=""></span></a>
                                         <a href="{{route('post.edit', $post)}}"><span class="mx-2" style="cursor: pointer;" ><img src="{{asset('img/icons/pencil/outline_edit_black_18dp.png')}}" alt=""></span></a>
-                                        <form action="{{route('post.destroy', $post)}}" method="POST">
+                                        <a href="#deleteModal" data-toggle="modal" data-target="#deleteModal" ><span class="mx-2" style="cursor: pointer;" ><img src="{{asset('img/icons/delete/outline_delete_black_18dp.png')}}" alt=""></span></a>
+                                        {{-- <form action="{{route('post.destroy', $post)}}" method="POST">
                                             @csrf @method('delete')
                                             <input type="submit" value="Borrar" style="display: none;" id="postDelete{{$post->id}}">
                                             <span class="mx-2" style="cursor: pointer;" onclick="document.querySelector('#postDelete{{$post->id}}').click();" ><img src="{{asset('img/icons/delete/outline_delete_black_18dp.png')}}" alt=""></span>
-                                        </form>
+                                        </form> --}}
                                     </td>
                                 </tr>
                             @endforeach
@@ -44,6 +45,9 @@
                 </div>
             </div>
         </section>
+
+        <x-alert-delete post={{$post}} />
+
     @endauth
 
 

@@ -22,15 +22,31 @@ zona de admin(sidebar(Componente) y todas las vistas )
 Para migue
 
 
-1 En la vista login cuando haces click en el forget password debe salir un modal con tres input, el primero para el email, el segundo para el alias y el ultimo para la nueva contraseña, el modal debe tener un boton d aceptar y uno de cancelar
-2 En la vista registro debe haber un boton para ir al login
-3 El componente nav debes hacer q se le pueda pasar un parametro booleano para q se muestre el buscador cuando la variable este en true y cuando este en false no se muestre y otro parametro q sea un numero q me hace falta para saber q tipo de busqueda hacer
-4 Arregla la vista post.show q esta fea(mala mia)
-5 En la vista post.create tienes q arreglar lo q pasa con la img y revisa lo ultimo q t puse en wsp pa q sepas q mas hacer ahi
-6 La vista post.edit t dije q era una tabla con la info del post y las opciones de editar y borrar, la d editar abre un modal con un input tipo texto si es un texto y tipo img si es img eso debes crear una variable booleana para q el coja la forma q haga falta
-7 La parte de asociar tag q esta en tag.userTags t dije q abre un modal con el listado de post del usuario y cada elemento d la lista tiene un check  y abajo del listado hay un boton d aceptar y uno d cancelar
-8 Falta hacer la vista profile q tiene el nombre d usuario con su foto de perfil bien grande y circular a la izq como sale en github cuando entras en un perfil y a la derecha una tabla dond yo voy a poner estadisticas
-9 Falta la vista borrador q es una tabla con los posts q estan en el borrador
+^1 En la vista login cuando haces click en el forget password debe salir un modal con tres input, el primero para el email, el segundo para el alias y el ultimo para la nueva contraseña, el modal debe tener un boton d aceptar y uno de cancelar
+^2 En la vista registro debe haber un boton para ir al login
+^3 El componente nav debes hacer q se le pueda pasar un parametro booleano para q se muestre el buscador cuando la variable este en true y cuando este en false no se muestre y otro parametro q sea un numero q me hace falta para saber q tipo de busqueda hacer
+^4 Arregla la vista post.show q esta fea(mala mia)
+^5 En la vista post.create tienes q arreglar lo q pasa con la img y revisa lo ultimo q t puse en wsp pa q sepas q mas hacer ahi
+^6 La vista post.edit t dije q era una tabla con la info del post y las opciones de editar y borrar, la d editar abre un modal con un input tipo texto si es un texto y tipo img si es img eso debes crear una variable booleana para q el coja la forma q haga falta
+^7 La parte de asociar tag q esta en tag.userTags t dije q abre un modal con el listado de post del usuario y cada elemento d la lista tiene un check  y abajo del listado hay un boton d aceptar y uno d cancelar
+-8 Falta hacer la vista profile q tiene el nombre d usuario con su foto de perfil bien grande y circular a la izq como sale en github cuando entras en un perfil y a la derecha una tabla dond yo voy a poner estadisticas
+-9 Falta la vista borrador q es una tabla con los posts q estan en el borrador
+-10 Diseño vista tag show 
+^11 Tengo q disparar un mensaje para preguntar si estas seguro de eliminar?
+^12 btn de agregar foto en create post q este desactivado hasta q no enlace una foto
+x13 arreglar foto de publicacion q se encoje o estira en home
+^14 arreglar el ver mas en home
+
+
+Para Lacho
+
+pasale la variable booleana $search(booleana) y el $type_search(numero para el tipo de busqueda) de un archivo para el componente nav
+en la vista post show valida si el usuario es dueño del post q esta viendo entonces q se muestre el btn de editar(eso yo lo agregue pq crei q era necesario ya si un usuario entra a ver su post es posible q pueda querer editarlo desde la vista show directamente)
+la vista forget pass esta vacia
+voy a crear un componete q pregunta si estas seguro de eliminar... (Tienes q pasarle las variables y configurarlo)
+hay problemas en create post a la hora de agregar  la tag ... se borran todos los campos
+en la vista post create no se q paso q intente agregar un post y me llevo a bloggers.test/post y me mostraba el objeto del post..! (creo q el problema esta en el btn de publicar, una posible solucion puede ser con variables de session para recoger todos esos campos no se no se jjjj )                                                  
+
 
 
 

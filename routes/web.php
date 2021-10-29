@@ -25,6 +25,8 @@ Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 
 Route::get('login', [LoginController::class, 'create'])->name('login.create');
 
+Route::post('forget', [LoginController::class, 'forgetPassword'])->name('login.forget');
+
 Route::post('login', [LoginController::class, 'store'])->name('login.store');
 
 Route::get('logout', [LoginController::class, 'destroy'])->name('login.destroy');

@@ -8,76 +8,70 @@
 @endsection
 @section('main')
 
-    <section class="container-fluid mt-5 pt-5 ">
-        <div class="row">
-            {{-- Post details --}}
-            <div class="col-12 col-md-7 col-lg-9 mb-5">
-                <div class="container">
-                    <div class="row d-flex flex-column align-items-center justify-content-center mt-5">
-                        <div class="col-10 center my-4">
-                            <h1 class="text-center" >Post Details</h1>
-                        </div>
-                        <div class="col-10 center">
-                            <img src="{{asset('storage/posts/img-ejemplo.jpg')}}" class="rounded-lg " style="max-width:100%;" alt="">
-                        </div>
-                        <div class="col-10 mh mt-4" >   
-                            <div class="container-fluid">
-                                <div class="row mh py-2">
-                                    <div class="col-12 col-lg-3 order-last order-lg-first rounded shadow">
-                                        <div class="container-fluid">
-                                            <div class="row center ">
-                                                <div class="col-12 d-flex flex-column align-items-center ">
-                                                    <div class="border rounded-circle my-2" style="width:55px; height:55px;" >
-                                                        {{-- @foreach ($imgsAutor as $imgAutor)
-                                                            @if ($imgAutor->imageable_id == $post->user_id)
-                                                                <img src="{{$imgAutor->getImageUrl}}" alt="Imagen del autor" class='w-100 h-100 rounded-circle' >
-                                                            @endif
-                                                        @endforeach --}}
-                                                    </div>
-                                                    <div class="d-flex flex-column align-items-center justify-content-center" >
-                                                        <span class="text-muted" style="font-size:80%;" >Autor</span>
-                                                        <span style="font-size:130%; font-weight:bold;" >{{$post->user->name}}</span>
-                                                        <span class="text-muted" style="font-size:80%;" >{{$post->created_at->diffForHumans()}}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+    <section class="container-fluid my-5 py-5 ">
+        <div class="row mh" >
 
-                                    </div>
-                                    <div class="col-9 p-4">
-                                        <h2>{{$post->title}}</h2>
-                                        <p>{{$post->summary}}</p>
-                                    </div>
-                                </div>
+            <div class="col-12 ">
+                <div class="d-flex justify-content-around align-items-center w-100" >
+                    <div>
+                        <h4>{{$post->title}}</h4>
+                    </div>
+                    <div class="center" >
+                        <div class="my-2 border rounded-circle" style="width:55px; height:55px;" >
+                            <!-- aqui va la imagen del autor o usuario q esta viendo el post -->
+                            {{--  @foreach ($imgsAutor as $imgAutor)
+                                @if ($imgAutor->imageable_id == $post->user_id)
+                                    <img src="{{$imgAutor->url}}" alt="Imagen del autor" class='w-100 h-100 rounded-circle' >
+                                @endif
+                            @endforeach  --}}
+                        </div>
+                        <div class="ml-2 center flex-column" >
+                            <div class="d-flex align-items-center " >
+                                <span class="text-muted mr-2 " style="font-size:80%;" >Autor </span>
+                                <span style="font-size:130%; font-weight:bold;" >
+                                    {{$post->user->name}}
+                                </span>
+                            </div>
+                            <div class="d-flex align-items-center " >
+                                <span class="text-muted mr-2 " style="font-size:80%;" >Fecha </span>
+                                <span style="font-weight:bold;" >
+                                    28, oct, 2021
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{-- sidebar --}}
-            <x-sidebar />
+
+            <div class="col-12 my-4" >
+                <p class="text-center" >{{$post->summary}}</p>
+            </div>
+
+            <div class="col-12">
+                <div class="container-fluid">
+                    <div class="row mh">
+                        <div class="col-12 col-md-8 d-flex flex-column align-items-center justify-content-between py-5 " >
+                            <div class="bg-dark center rounded-lg" >
+                                <img src="{{asset('img/img-login-register.jpg')}}" class="rounded-lg" style="max-height:300px;" alt="">
+                            </div>
+                            <div class="my-4" >
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rerum optio ea totam praesentium eaque harum quis non sit, ratione, quia ad! Cumque deserunt a ipsa veritatis, vero at fuga corporis molestias ex pariatur unde perspiciatis dignissimos. Voluptates impedit nesciunt sint.</p>
+                            </div>
+                            <div class="my-2" >
+                                {{-- si el usuario es el dueño de ese post q pueda editar desde aqui --}}
+                                {{-- <a href="{{route('post.edit', $post)}}"><span class="mx-2" style="cursor: pointer;" ><img src="{{asset('img/icons/pencil/outline_edit_black_18dp.png')}}" alt=""></span></a> --}}
+                            </div>
+                        </div>
+                        {{-- sidebar --}}
+                        <div class="col-12 col-md-4 " >
+                            <x-sidebar/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </section>
-    <!-- <p>{{$post->id}}</p>
-    <p>{{$post->title}}</p>
-    <p>{{$post->summary}}</p>
-    <p>{{$post->user_id}}</p>
-    @isset($imgAutor->getImageUrl)
-        <img src="{{$imgAutor->getImageUrl}}" width="300px" height="300px" alt="Imagen del autor">
-    @endisset
-    @foreach ($post->texts as $text)
-        <p>{{$text->text}}</p>
-    @endforeach
-    @foreach ($post->tags as $tag)
-        <p style="color: {{$tag->color}}">{{$tag->name}}</p>
-    @endforeach
-    @foreach ($imgs as $img)
-        @isset($img->url)
-            @if ($img->url != null)
-                <img src="{{asset($img->url)}}" width="300px" height="300px" alt="Imagen del post">
-            @endif
-        @endisset
-    @endforeach -->
 
 
 @endsection
