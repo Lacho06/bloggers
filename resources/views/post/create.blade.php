@@ -141,9 +141,21 @@
                                                     @isset($post->summary)
                                                         <p><small class="text-muted">{{$post->summary}}</small></p>
                                                     @endisset
-                                                    @isset($post->texts)
-                                                        @foreach ($post->texts as $text)
-                                                            <p>{{$text->text}}</p>
+                                                    @isset($orderPost)
+                                                        @foreach ($orderPost as $order)
+                                                            @if ($order->itemable_type == $img)
+                                                                @foreach ($images as $i)
+                                                                    @if ($order->itemable_id == $i->id)
+                                                                        <img src="{{asset($i->url)}}" alt="">
+                                                                    @endif
+                                                                @endforeach
+                                                            @else
+                                                                @foreach ($texts as $i)
+                                                                    @if ($order->itemable_id == $i->id)
+                                                                        <p>{{$i->text}}</p>
+                                                                    @endif
+                                                                @endforeach
+                                                            @endif
                                                         @endforeach
                                                     @endisset
                                                 </div>
@@ -154,11 +166,12 @@
                                                             <div class="col-12 col-md-6 center">
                                                                 <div class="my-2 border rounded-circle" style="width:55px; height:55px;" >
                                                                     <!-- aqui va la imagen del autor o usuario q esta creando el post -->
-                                                                    {{--  @foreach ($imgsAutor as $imgAutor)
-                                                                        @if ($imgAutor->imageable_id == $post->user_id)
-                                                                            <img src="{{$imgAutor->url}}" alt="Imagen del autor" class='w-100 h-100 rounded-circle' >
-                                                                        @endif
-                                                                    @endforeach  --}}
+                                                                    {{--  TODO: quitar el storage/posts/ del condicional  --}}
+                                                                    @if ($imgAutor->url != null && $imgAutor->url != 'storage/posts/')
+                                                                        <img src="{{$imgAutor->url}}" alt="Imagen del autor" class='w-100 h-100 rounded-circle'>
+                                                                    @else
+                                                                        <img src="{{asset('img/img-perfil-default.png')}}" alt="Imagen del autor" class='w-100 h-100 rounded-circle'>
+                                                                    @endif
                                                                 </div>
                                                                 <div class="ml-2 center flex-column" >
                                                                     <div class="d-flex align-items-center " >
@@ -170,15 +183,16 @@
                                                                     <div class="d-flex align-items-center " >
                                                                         <span class="mr-2 text-muted " style="font-size:80%;" >Fecha </span>
                                                                         <span style="font-weight:bold;" >
-                                                                            28, oct, 2021
+                                                                            {{$post->created_at->diffForHumans()}}
                                                                         </span>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="col-12 col-md-6 center" >
-                                                                <div class="center " >
-                                                                    <div class="px-3 py-1 m-2 badge-pill" style="border:1px solid #17a2b8;" >Tag1</div>
-                                                                    <div class="px-3 py-1 m-2 badge-pill" style="border:1px solid #ffc107;" >Tag2</div>
+                                                                <div class="center">
+                                                                    @foreach ($post->tags as $tag)
+                                                                        <div class="px-3 py-1 m-2 badge-pill" style="border:1px solid {{$tag->color}};">{{$tag->name}}</div>
+                                                                    @endforeach
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -264,7 +278,7 @@
 
         function iniciar(){
             cajadatos=document.getElementById('mostrarImagenVistaPrevia');
-            submitImg = document.getElementById('submitImg');            
+            submitImg = document.getElementById('submitImg');
             mostrarImagen = document.getElementById('mostrarImagen');
             var archivos=document.getElementById('multimediaCreate');
             archivos.addEventListener('change', procesar, false);

@@ -28,14 +28,20 @@
                         <th>id</th>
                         <th>Title</th>
                         <th>Summary</th>
-                        <th></th>
+                        <th>Options</th>
                     </thead>
                     <tbody>
                         {{-- @foreach ($posts as $post) --}}
                             <tr>
                                 <td>id</td>
-                                <td>$post->title}}</td>
-                                <td>$post->summary}}</td>
+                                <td>{{$post->title}}</td>
+                                <td>
+                                    @empty($post->summary)
+                                        No tiene resumen
+                                        @else
+                                        {{$post->summary}}
+                                    @endempty
+                                </td>
                                 <td class="d-flex" >
                                     <a href="#editModal" data-toggle="modal" data-target="#editModal" ><span class="mx-2" style="cursor: pointer;" ><img src="{{asset('img/icons/pencil/outline_edit_black_18dp.png')}}" alt=""></span></a>
                                     <form action="{{route('post.destroy', $post)}}" method="POST">

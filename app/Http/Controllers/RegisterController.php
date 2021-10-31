@@ -39,7 +39,7 @@ class RegisterController extends Controller
 
         if($request->file('file')){
             //subimos la imagen al servidor
-            $name = time().'_'.$request->file->getClientOriginalName();
+            $name = time().'_'.Str::slug($request->file->getClientOriginalName());
             $route = $request->file('file')->storeAs('images', $name, 'public');
             //guardamos en la base de datos la ruta de la imagen
             $image->url = 'storage/'.$route;

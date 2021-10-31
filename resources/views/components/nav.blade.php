@@ -17,6 +17,7 @@
                             <div class="dropdown-menu">
                                 <a href="{{route('post.create')}}" class="dropdown-item nav-link">Crear Post</a>
                                 <a href="{{route('post.index')}}" class="dropdown-item border-top nav-link">Ver mis Posts</a>
+                                <a href="{{route('post.borrador')}}" class="dropdown-item border-top nav-link">Borrador</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">

@@ -37,6 +37,8 @@ Route::post('register', [RegisterController::class, 'store'])->name('register.st
 
 Route::get('post/create/{id?}', [PostController::class, 'create'])->middleware('auth')->name('post.create');
 
+Route::get('post/borrador', [PostController::class, 'borrador'])->middleware('auth')->name('post.borrador');
+
 Route::post('post/search', [PostController::class, 'search'])->name('post.search');
 
 Route::get('post/{post}', [PostController::class, 'show'])->name('post.show');

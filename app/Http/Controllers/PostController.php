@@ -11,7 +11,6 @@ use App\Models\OrderPost;
 use App\Models\User;
 use App\Models\Text;
 use App\Models\Tag;
-use PDO;
 
 class PostController extends Controller
 {
@@ -23,11 +22,13 @@ class PostController extends Controller
     }
 
     public function borrador(){
-        return view('post.borrador');
+        $posts = Post::where('user_id', auth()->user()->id)->where('borrador', 1)->get();
+
+        return view('post.borrador', compact('posts'));
     }
 
     public function search(Request $request){
-        $posts = Post::where('title', 'LIKE', '%'.$request->search.'%')->orderBy('created_at', 'desc')->get();
+        $posts = Post::where('title', 'LIKE', '%'.$request->search.'%')->where('borrador', 0)->orderBy('created_at', 'desc')->get();
         $totalImgs = Image::select('*')->get();
         foreach($totalImgs as $item){
             if($item->imageable_type == User::class){
@@ -41,11 +42,22 @@ class PostController extends Controller
 
 
     public function create($id=null){
-        //TODO: problemas con el responsive d la vista post create
-        $tags = Tag::where('user_id', auth()->user()->id)->get();
+        $tags = Tag::select('*')->orderBy('name', 'asc')->get();
         if($id != null){
             $post = Post::find($id);
-            return view('post.create', compact('post', 'tags'));
+            $imgAutor = Image::where('imageable_id', $post->user_id)->where('imageable_type', User::class)->first();
+            $orderPost = OrderPost::where('post_id', $post->id)->orderBy('order', 'asc')->get();
+            $images = [];
+            $texts = [];
+            foreach($orderPost as $order){
+                if($order->itemable_type == Image::class){
+                    $images[] = Image::where('id', $order->itemable_id)->where('imageable_type', Post::class)->first();
+                }else{
+                    $texts[] = Text::where('id', $order->itemable_id)->first();
+                }
+            }
+            $img = Image::class;
+            return view('post.create', compact('post', 'tags', 'orderPost', 'imgAutor', 'img', 'images', 'texts'));
         }
         return view('post.create', compact('tags'));
     }
@@ -67,7 +79,7 @@ class PostController extends Controller
         }else if($request->formType == 2){
             //le pasamos el estracto al post
             $request->validate([
-
+                'estracto' => 'required'
             ]);
             $post = Post::find($request->post_id);
             $post->summary = $request->estracto;
@@ -76,6 +88,9 @@ class PostController extends Controller
             return redirect()->route('post.create', compact('id'));
         }else if($request->formType == 3){
             //creamos un registro en la tabla textos y le ponemos el id del post
+            $request->validate([
+                'descripcion' => 'required'
+            ]);
             $id = $request->post_id;
             $order = 0;
             $text = new Text();
@@ -99,12 +114,17 @@ class PostController extends Controller
             return redirect()->route('post.create', compact('id'));
         }else if($request->formType == 4){
             //creamos un registro en la tabla images y le ponemos el id del post y la clase post
+            $request->validate([
+                'multimediaCreate' => 'required|image'
+            ]);
             $id = $request->post_id;
             $img = new Image();
+            $orderPost = OrderPost::where('post_id', $id)->get();
+            $order = 0;
 
             if($request->file('multimediaCreate')){
                 //subimos la imagen al servidor
-                $name = time().'_'.$request->multimediaCreate->getClientOriginalName();
+                $name = time().'_'.Str::slug($request->multimediaCreate->getClientOriginalName());
                 $route = $request->file('multimediaCreate')->storeAs('images', $name, 'public');
                 //guardamos en la base de datos la ruta de la imagen
                 $img->url = 'storage/'.$route;
@@ -118,6 +138,18 @@ class PostController extends Controller
             $img->imageable_id = $request->post_id;
             $img->imageable_type = Post::class;
             $img->save();
+            //si encuentra entonces contamos la cantidad y colocamos d id la cantidad mas 1
+            foreach($orderPost as $item){
+                $order++;
+            }
+            //si no encuentra le colocamos el id 1
+            $orden = new OrderPost();
+            $orden->post_id = $id;
+            $orden->itemable_id = $img->id;
+            $orden->itemable_type = Image::class;
+            $orden->order = $order+1;
+            $orden->save();
+
             return redirect()->route('post.create', compact('id'));
         }else if($request->formType == 5){
             //establecemos los tags del post
@@ -125,7 +157,14 @@ class PostController extends Controller
             $tag_selected = Tag::find($request->tag);
             $post = Post::find($request->post_id);
             $id = $request->post_id;
-            foreach($post->tags() as $item){
+            //validamos si el post ya tiene ese tag asociado
+            foreach($post->tags as $item){
+                if($item->name == $tag_selected->name && $item->id == $tag_selected->id){
+                    //TODO: mandamos un sms indicando q el post ya tiene asociado ese tag
+                    return redirect()->route('post.create', compact('id'));
+                }
+            }
+            foreach($post->tags as $item){
                 $contador++;
             }
             if($contador>=2){
@@ -153,21 +192,53 @@ class PostController extends Controller
         return view('post.edit', compact('post'));
     }
 
-
     public function show(Post $post){
-        //inicializamos las variables para q en caso de q no existan no arroje error
-        $imgAutor = null;
-        $imgs = [];
-        // falta enviar a la vista los post relacionados
-        $totalImgs = Image::select('*')->get();
-        foreach($totalImgs as $item){
-            if($item->imageable_id == $post->id && $item->imageable_type == Post::class){
-                $imgs[] = $item;
-            }else if($item->imageable_id == $post->user_id && $item->imageable_type == User::class){
-                $imgAutor = $item;
+        $orderPost = OrderPost::where('post_id', $post->id)->orderBy('order', 'asc')->get();
+        $images = [];
+        $texts = [];
+        foreach($orderPost as $order){
+            if($order->itemable_type == Image::class){
+                $images[] = Image::where('id', $order->itemable_id)->where('imageable_type', Post::class)->first();
+            }else{
+                $texts[] = Text::where('id', $order->itemable_id)->first();
             }
         }
-        return view('post.show', compact('post', 'imgAutor', 'imgs'));
+        $imgAutor = Image::where('imageable_id', $post->user->id)->where('imageable_type', User::class)->first();
+        //analizamos cada tag
+        foreach($post->tags as $tag){
+            //capturamos todos los posts asociados a los tags
+            $totalPosts[] = $tag->posts;
+        }
+        //creamos un array para filtrar los posts y no poner posts repetidos
+        $relacionados = [];
+
+        //usamos una variable booleana para guardar siempre el primer post en el arreglo d relacionados
+        $first = true;
+        //recorremos el total de posts y vamos filtrando
+        foreach($totalPosts as $posts){
+            foreach($posts as $post){
+                if($first == true){
+                    $relacionados[] = $post;
+                    $first = false;
+                }
+                //usamos una variable booleana para saber si hay algun post con el mismo id en el arreglo de relacionados
+                $isRepeat = false;
+                //recorremos el arreglo de los relacionados
+                foreach($relacionados as $relacionado){
+                    if($post->id == $relacionado->id){
+                        $isRepeat = true;
+                    }
+                }
+
+                //preguntamos si la variable esta en falso significa q no se repite y lo guardamos
+                if($isRepeat == false){
+                    $relacionados[] = $post;
+                }
+            }
+        }
+        $img = Image::class;
+        // falta enviar a la vista los post relacionados
+        return view('post.show', compact('post', 'orderPost', 'images', 'texts', 'imgAutor', 'img', 'relacionados'));
     }
 
 

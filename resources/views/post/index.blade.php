@@ -26,7 +26,14 @@
                                 <tr>
                                     <td>{{$post->id}}</td>
                                     <td>{{$post->title}}</td>
-                                    <td>{{$post->summary}}</td>
+                                    <td>
+                                        @empty($post->summary)
+                                            No hay resumen todavia
+                                        @else
+                                            {{$post->summary}}
+                                        @endempty
+
+                                    </td>
                                     <td class="d-flex" >
                                         <a href="{{route('post.show', $post)}}"><span class="mx-2" style="cursor: pointer;" ><img src="{{asset('img/icons/eye/outline_visibility_black_18dp.png')}}" alt=""></span></a>
                                         <a href="{{route('post.edit', $post)}}"><span class="mx-2" style="cursor: pointer;" ><img src="{{asset('img/icons/pencil/outline_edit_black_18dp.png')}}" alt=""></span></a>

@@ -60,9 +60,9 @@
                 <div class="modal-body" >
                     <form action="{{route('login.forget')}}" method="POST" enctype="multipart/form-data" class="form center flex-column" >
                         @csrf
-                        <input type="email" name="email" id="email"  class="my-2 form-control " placeholder="Email" value="" >
-                        <input type="text" name="alias" id="alias"  class="my-2 form-control " placeholder="Alias" value="" >
-                        <input type="password" name="contrasena" id="contrasena" class="my-2 form-control " placeholder="New Password" >
+                        <input type="email" name="emailchange" id="email"  class="my-2 form-control " placeholder="Email" value="" >
+                        <input type="text" name="aliaschange" id="alias"  class="my-2 form-control " placeholder="Alias" value="" >
+                        <input type="password" name="contrasenachange" id="contrasena" class="my-2 form-control " placeholder="New Password" >
                         <button type="submit" class="mx-auto my-2 btn btn-sm btn-success" id="submitTag">Cambiar</button>
                     </form>
                 </div>

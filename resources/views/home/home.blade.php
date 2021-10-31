@@ -44,9 +44,11 @@
                                                 <div class="p-0 rounded shadow row h-100 position-relative PostWithOutImage " >
                                                     <div class="w-100 cap position-absolute d-flex align-items-end " style="bottom:0; height:30px;" >
                                                         <div class="mb-1 d-flex">
-                                                            @foreach ($post->tags as $tag)
+                                                            @forelse ($post->tags as $tag)
                                                                 <small class="mx-2" ><a href="{{route('tag.show', $tag)}}" class="text-white">{{$tag->name}}</a></small>
-                                                            @endforeach
+                                                            @empty
+                                                                <small class="mx-2 text-white">No hay tags asociados</small>
+                                                            @endforelse
                                                         </div>
                                                     </div>
                                                     <div class="p-0 m-0 col-12 col-sm-5 col-md-12 col-lg-5 bg-primary rounded-left">
@@ -106,8 +108,8 @@
                                                             <div class="mb-1 d-flex" >
                                                                 @forelse ($post->tags as $tag)
                                                                     <small class="mx-2" ><a href="{{route('tag.show', $tag)}}" class="text-white">{{$tag->name}}</a></small>
-                                                                    @empty
-                                                                        <small class="mx-2 text-white">No hay tags asociados</small>
+                                                                @empty
+                                                                    <small class="mx-2 text-white">No hay tags asociados</small>
                                                                 @endforelse
                                                             </div>
                                                         </div>
